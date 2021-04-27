@@ -3,18 +3,50 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    alignItems:"center",
+    fontFamily:"Proxima Nova",
+    backgroundColor:"#ffffff",
   },
-  login: {
-    padding: 8,
+
+  imgcontainer: {
+    marginTop:20,
+    height: '60%',
+    width: '100%',
   },
-  forgot: {
-    marginTop: 12,
+  textcontainer :{
+    color: "#2CC980",
+    fontSize: 22,
+    fontWeight: "bold",
+    textAlign: "center",
+    paddingTop:20,
+    
   },
-  labelStyle: {
-    fontSize: 12,
+  mobilecontainer: {
+    textAlign: "center",
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginTop:'40%',
+    marginBottom:'15%',
+
   },
+  inputcontainer:{
+  marginTop:5,
+  borderBottomWidth:1,
+  borderColor:"#ACE894",
+  marginBottom:"20%",
+  },
+
+  acccontainer:{
+    fontSize:12,
+    color:"#848685",
+    textAlign:"left",
+  },
+
+  signupcontainer:{
+    fontSize:16,
+    color:"#139A5B",
+    textAlign:"left",
+}
 });
 
 export default styles;
