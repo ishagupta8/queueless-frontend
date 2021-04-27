@@ -8,6 +8,7 @@ import { navigationRef } from './NavigationService';
 import Login from 'app/screens/Login';
 import Home from 'app/screens/Home';
 import ForgotPassword from 'app/screens/ForgotPassword';
+import MainLogin from 'app/screens/MainLogin';
 import { ILoginState } from 'app/models/reducers/login';
 
 const Stack = createStackNavigator();
@@ -25,13 +26,21 @@ interface IState {
   loginReducer: ILoginState;
 }
 
-
 const AuthNavigator = () => {
   const isLoggedIn = useSelector(
     (state: IState) => state.loginReducer.isLoggedIn,
   );
   return (
     <AuthStack.Navigator>
+      <Stack.Screen
+        name="MainLogin"
+        component={MainLogin}
+        options={{
+          // When logging out, a pop animation feels intuitive
+          // You can remove this if you want the default 'push' animation
+          animationTypeForReplace: isLoggedIn ? 'push' : 'pop',
+        }}
+      />
       <Stack.Screen
         name="Login"
         component={Login}
@@ -68,7 +77,6 @@ const App: React.FC<IProps> = (props: IProps) => {
 
   return (
     <NavigationContainer ref={navigationRef}>
-
       <Stack.Navigator headerMode="none">
         {isLoggedIn ? (
           <Stack.Screen
