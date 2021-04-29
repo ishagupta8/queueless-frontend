@@ -11,6 +11,7 @@ import ForgotPassword from 'app/screens/ForgotPassword';
 import MainLogin from 'app/screens/MainLogin';
 import { ILoginState } from 'app/models/reducers/login';
 import SignupForm from '../components/SignupForm';
+import Barcode from '../components/Barcode';
 
 const Stack = createStackNavigator();
 const AuthStack = createStackNavigator();
@@ -34,8 +35,8 @@ const AuthNavigator = () => {
   return (
     <AuthStack.Navigator>
       <Stack.Screen
-        name="MainLogin"
-        component={MainLogin}
+        name="Barcode"
+        component={Barcode}
         options={{
           // When logging out, a pop animation feels intuitive
           // You can remove this if you want the default 'push' animation
@@ -70,6 +71,16 @@ const AuthNavigator = () => {
         }}
 
       />
+      {/* <Stack.Screen
+        name="Barcode"
+        component={Barcode}
+        options={{
+          // When logging out, a pop animation feels intuitive
+          // You can remove this if you want the default 'push' animation
+          animationTypeForReplace: isLoggedIn ? 'push' : 'pop',
+        }} */}
+
+      
     </AuthStack.Navigator>
   );
 };

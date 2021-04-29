@@ -21,6 +21,8 @@ const PhnVerification: React.FC<Iphn> = ({phnNumber}:Iphn) => {
   const[otp2,setOtp2] = useState('');
   const[otp3,setOtp3] = useState('');
   const[otp4,setOtp4] = useState('');
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
 
     const dispatch = useDispatch();
     const onLogin = () => dispatch(loginActions.requestLogin('test', '1234'));
@@ -31,13 +33,13 @@ const PhnVerification: React.FC<Iphn> = ({phnNumber}:Iphn) => {
       console.log(JSON.stringify(response.data));
       if(response.data.isVerified==="approved")
       {
-        <ModalShow show={true}/>
-        if(response.data.isUser)
+        setShow(true);
+      if(response.data.isUser)
       {
         NavigationService.navigate('ForgetPassword');
       }
       else{
-        NavigationService.navigate('SignupForm');
+        NavigationService.navigate('Barcode');
       }
     }
     } catch (error) {
@@ -47,6 +49,10 @@ const PhnVerification: React.FC<Iphn> = ({phnNumber}:Iphn) => {
     };
     
   return (
+    <>
+    <ModalShow show={show}
+        handleClose={handleClose}
+        modalInput="Phone Verified" />
       <KeyboardAvoidingView
       behavior="padding"
     style={styles.container}
@@ -98,6 +104,7 @@ const PhnVerification: React.FC<Iphn> = ({phnNumber}:Iphn) => {
         </ImageBackground>
   
       </KeyboardAvoidingView>
+      </>
   );
 };
 

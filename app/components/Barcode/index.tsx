@@ -12,15 +12,19 @@ import styles from './styles';
 
 const ScanScreen = ()=> {
   const onSuccess = (e:any) => {
-    Linking.openURL(e.data).catch(err =>
-      console.error('An error occured', err)
-    );
+    const check = e.data;
+    console.log('scanned data' + check);
+    // Linking.openURL(e.data).catch(err =>
+    //   console.error('An error occured', err)
+    // );
   };
   
   return (
   <QRCodeScanner
   onRead={onSuccess}
   cameraProps={{ flashMode: Camera.Constants.FlashMode.auto }}
+  reactivate={true}
+  showMarker={true}
   topContent={
   <Text style={styles.centerText}>
       Go to{' '}
