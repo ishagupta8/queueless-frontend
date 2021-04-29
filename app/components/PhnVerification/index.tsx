@@ -32,14 +32,14 @@ const PhnVerification: React.FC<Iphn> = ({phnNumber}:Iphn) => {
       if(response.data.isVerified==="approved")
       {
         <ModalShow show={true}/>
-      }
-      if(response.data.isUser && response.data.isVerified==="approved")
+        if(response.data.isUser)
       {
         NavigationService.navigate('ForgetPassword');
       }
       else{
         NavigationService.navigate('SignupForm');
       }
+    }
     } catch (error) {
       // handle error
       console.log(error.message);
