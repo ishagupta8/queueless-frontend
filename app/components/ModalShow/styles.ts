@@ -41,7 +41,12 @@ const styles = StyleSheet.create({
     modalText: {
       marginBottom: 15,
       textAlign: "center"
-    }
+    },
+    okbutton: {
+      alignSelf:"flex-end",
+      paddingTop: '20%',
+      width: '10%',
+    },
   });
   
   export default styles;

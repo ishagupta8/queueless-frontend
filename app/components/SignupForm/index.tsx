@@ -1,9 +1,10 @@
 import React, { useState } from "react"
-import { Alert, ImageBackground, Text, TextInput, View } from "react-native"
+import { Alert, Button, ImageBackground, Text, TextInput, View } from "react-native"
 import styles from "./styles";
 import LoginButton from 'app/components/Button';
 import axios from "axios";
 import NavigationService from "../../navigation/NavigationService";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 interface Iphn {
   phnNumber:string,
@@ -75,7 +76,7 @@ const SignupForm: React.FC = () => {
         <TextInput
         style={styles.inputcontainer}
           placeholder="Email Id*"
-          onBlur={input => handleEmail(input)}
+          onPressOut={input => handleEmail(input)}
           // onChangeText={input => handleEmail(input)}
         />
         <Text style={styles.textcontainer}>Address</Text>
@@ -106,8 +107,9 @@ const SignupForm: React.FC = () => {
         />
 
         <View style={styles.submitbutton}>
-        <LoginButton OnPress={handleFormInput()}
-        title="Submit"></LoginButton>
+        {/* <LoginButton OnPress={()=>{handleFormInput()}}
+        title="Submit"></LoginButton>  */}
+        <Button title="Submit" color="green" onPress={handleFormInput}/>
         </View>
 </View>
 </ImageBackground>

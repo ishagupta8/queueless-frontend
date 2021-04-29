@@ -1,35 +1,34 @@
 import React, { useState } from "react";
-import { Alert, Modal, Text, Pressable, View, Image } from "react-native";
+import { Alert, Modal, Text, Pressable, View, Image, TouchableOpacity, TouchableWithoutFeedback } from "react-native";
 import styles from "./styles";
 
 interface IModal{
     show:boolean;
+    handleClose: () => void;
+    modalInput: string;
+
 }
-const ModalShow: React.FC<IModal> = ({show}:IModal)  => {
-  const [modalVisible, setModalVisible] = useState(show);
+const ModalShow: React.FC<IModal> = ({show,handleClose, modalInput}:IModal)  => {
   return (
     <View style={styles.centeredView}>
       <Modal
         animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
-          setModalVisible(!modalVisible);
-        }}
+        visible={show}
+        onRequestClose={()=>handleClose()}
       >
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-             <Image source={require('../../assets/tick.png')} /> 
-            <Text style={styles.modalText}>Phone Verified</Text>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}
-            >
-              <Text style={styles.textStyle}>OK</Text>
-            </Pressable>
-          </View>
-        </View>
+        {/* <View style={styles.centeredView}>s
+          <View style={styles.modalView}> */}
+          <TouchableOpacity 
+            activeOpacity={1} 
+            onPressOut={() => handleClose()}
+          >
+            <TouchableWithoutFeedback>
+                <View>
+                <Image source={require('../../assets/tick.png')} /> 
+                  <Text>{modalInput}</Text>
+                </View>
+              </TouchableWithoutFeedback>
+          </TouchableOpacity>  
       </Modal>
     </View>
   );
