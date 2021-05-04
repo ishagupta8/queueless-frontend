@@ -27,7 +27,7 @@ const Login: React.FC = () => {
   //const onForgot = () => NavigationService.navigate('ForgotPassword');
   const onOTP = async () => {
     try{
-      const response = await axios.get(`http://nodejsnoq-env.eba-kfqp329m.us-east-1.elasticbeanstalk.com/api/v1/auth/sendOtp?phonenumber=${"91"+mobileinput}&channel=sms`);
+      const response = await axios.get(`http://nodejsnoq-env.eba-kfqp329m.us-east-1.elasticbeanstalk.com/api/v1/auth/sendOtp?phonenumber=${mobileinput}&channel=sms`);
       if(response.data!="null")
       ToastAndroid.show('OTP Sent',ToastAndroid.SHORT);
     } catch (error) {

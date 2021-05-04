@@ -10,7 +10,9 @@ interface Iphn {
   phnNumber:string,
 }
 
-const SignupForm: React.FC = () => {
+const SignupForm = ({route}:any) => {
+  const {phnNumber} = route.params;
+  console.log(phnNumber);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [building, setBuilding] = useState('');
@@ -24,7 +26,7 @@ const SignupForm: React.FC = () => {
     const user = {
       name: name,
       email:email,
-      phone:'7355780258',
+      phone:phnNumber,
       building:building,
       street:street,
       city:city,

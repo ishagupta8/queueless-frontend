@@ -6,7 +6,7 @@ import { Text } from 'react-native';
 import LoginButton from 'app/components/Button';
 
 const Login: React.FC = () => {
-  const onLogin = () => NavigationService.navigate('Login');
+  const onLogin = () =>  NavigationService.navigate('Login');
   return (
     <View style={styles.container}>
       <Text style={styles.header}>

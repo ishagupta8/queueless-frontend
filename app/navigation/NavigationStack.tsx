@@ -12,11 +12,15 @@ import MainLogin from 'app/screens/MainLogin';
 import { ILoginState } from 'app/models/reducers/login';
 import SignupForm from '../components/SignupForm';
 import Barcode from '../components/Barcode';
+import getSession from '../services/getSession';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 
 const Stack = createStackNavigator();
 const AuthStack = createStackNavigator();
 const LoggedInStack = createStackNavigator();
+
 
 const homeOptions = {
   title: 'Home',
@@ -88,7 +92,7 @@ const AuthNavigator = () => {
 
 const LoggedInNavigator = () => (
   <LoggedInStack.Navigator>
-    <Stack.Screen name="Home" component={Home} options={homeOptions} />
+    <Stack.Screen name="Barcode" component={Barcode} />
   </LoggedInStack.Navigator>
 );
 
@@ -97,15 +101,32 @@ const App: React.FC<IProps> = (props: IProps) => {
   const isLoggedIn = useSelector(
     (state: IState) => state.loginReducer.isLoggedIn,
   );
+  const [flag, setflag] = useState(false);
 
+  useEffect(() => {
+    const session = async () =>{
+      const userSession = await axios.get(`http://nodejsnoq-env.eba-kfqp329m.us-east-1.elasticbeanstalk.com/api/v1/`);
+      console.log(userSession);
+         if(userSession.data.data !== "nothing")
+         setflag(true); 
+      
+      console.log("session",userSession.data.data);
+      console.log("flag", flag);
+    };
+ 
+    session();
+  }, []);
+ 
   return (
+    <>
+    {console.log("flag", flag)}
     <NavigationContainer ref={navigationRef}>
       <Stack.Navigator headerMode="none">
-        {isLoggedIn ? (
+        {flag ? (
           <Stack.Screen
-            name="Home"
+            name="Barcode"
             component={LoggedInNavigator}
-            options={homeOptions}
+
           />
         ) : (
           <Stack.Screen
@@ -120,6 +141,7 @@ const App: React.FC<IProps> = (props: IProps) => {
         )}
       </Stack.Navigator>
     </NavigationContainer>
+    </>
   );
 };
 

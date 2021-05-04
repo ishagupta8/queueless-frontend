@@ -36,9 +36,9 @@ const PhnVerification: React.FC<Iphn> = ({ phnNumber }: Iphn) => {
     setModalVisible(!modalVisible);
     if (otpVerification === 'approved') {
       if (user) {
-        NavigationService.navigate('ForgetPassword');
+        NavigationService.navigate('Barcode');
       } else {
-        NavigationService.navigate('SignupForm');
+        NavigationService.navigate('SignupForm',{phnNumber:phnNumber});
       }
     }
   };
@@ -49,7 +49,7 @@ const PhnVerification: React.FC<Iphn> = ({ phnNumber }: Iphn) => {
     let otp = otp1 + otp2 + otp3 + otp4;
     try {
       const response = await axios.get(
-        `https://qless-new.herokuapp.com/api/v1/auth/verifyOtp?phonenumber=91${phnNumber}&code=${otp}`,
+        `http://nodejsnoq-env.eba-kfqp329m.us-east-1.elasticbeanstalk.com/api/v1/auth/verifyOtp?phonenumber=${phnNumber}&code=${otp}`,
       );
       console.log(JSON.stringify(response.data));
       setModalVisible(!modalVisible);
@@ -57,6 +57,7 @@ const PhnVerification: React.FC<Iphn> = ({ phnNumber }: Iphn) => {
       setUser(response.data.isUser);
       if (response.data.isVerified === 'approved') {
         setOtpResult('NUMBER VERIFIED');
+        
       } else {
         setOtpResult('INVALID OTP');
       }

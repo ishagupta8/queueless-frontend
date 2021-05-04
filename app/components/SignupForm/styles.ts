@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   },
   submitbutton: {
     alignSelf:"center",
-    marginTop: '5%',
+    marginTop: '2%',
     width: '45%',
     borderRadius: 4,
   },

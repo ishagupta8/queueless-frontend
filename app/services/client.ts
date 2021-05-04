@@ -7,7 +7,7 @@ const apiClient = axios.create({
 });
 
 const apiClient1 = axios.create({
-  baseURL: '/users',
+  baseURL: '/',
   responseType: 'json',
   withCredentials: true,
 });
