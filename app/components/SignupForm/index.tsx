@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Alert, Button, ImageBackground, Text, TextInput, View } from "react-native"
+import { Alert, Button, ImageBackground, Text, TextInput, ToastAndroid, View } from "react-native"
 import styles from "./styles";
 import LoginButton from 'app/components/Button';
 import axios from "axios";
@@ -33,9 +33,16 @@ const SignupForm: React.FC = () => {
     }
     console.log(user);
     try{
-    const response = await axios.post(`https://qless-new.herokuapp.com/api/v1/users/register/`,user);
+    const response = await axios.post(`http://nodejsnoq-env.eba-kfqp329m.us-east-1.elasticbeanstalk.com/api/v1/users/register/`,user);
     console.log(JSON.stringify(response.data));
-
+    if(response.data!=null)
+    {
+      ToastAndroid.show("Welcome to NoQ", ToastAndroid.LONG);
+      NavigationService.navigate('Barcode');
+    }
+    else{
+      ToastAndroid.show("Something went wrong", ToastAndroid.LONG);
+    }
   } catch (error) {
     // handle error
     console.log(error.message);
@@ -46,8 +53,10 @@ const SignupForm: React.FC = () => {
     if(!name.trim()){
     Alert.alert('* marked fields are compulsory');
     }
+    
     else{
       RegisterUser();
+
     }
   }
 
@@ -76,8 +85,8 @@ const SignupForm: React.FC = () => {
         <TextInput
         style={styles.inputcontainer}
           placeholder="Email Id*"
-          onPressOut={input => handleEmail(input)}
-          // onChangeText={input => handleEmail(input)}
+          //onBlur={input => handleEmail(input)}
+          onChangeText={input => setEmail(input)}
         />
         <Text style={styles.textcontainer}>Address</Text>
         <TextInput
@@ -109,7 +118,7 @@ const SignupForm: React.FC = () => {
         <View style={styles.submitbutton}>
         {/* <LoginButton OnPress={()=>{handleFormInput()}}
         title="Submit"></LoginButton>  */}
-        <Button title="Submit" color="green" onPress={handleFormInput}/>
+        <Button title="Submit" color="#0DB165" onPress={handleFormInput}/>
         </View>
 </View>
 </ImageBackground>

@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { ImageBackground, KeyboardAvoidingView, Pressable, View } from 'react-native';
+import { ImageBackground, KeyboardAvoidingView, Pressable, ToastAndroid, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import * as loginActions from 'app/store/actions/loginActions';
@@ -29,18 +29,24 @@ const PhnVerification: React.FC<Iphn> = ({phnNumber}:Iphn) => {
     const VerifyOTP = async () => {
       let otp = otp1+otp2+otp3+otp4;
       try{
-      const response = await axios.get(`https://qless-new.herokuapp.com/api/v1/auth/verifyOtp?phonenumber=91${phnNumber}&code=${otp}`);
+      const response = await axios.get(`http://nodejsnoq-env.eba-kfqp329m.us-east-1.elasticbeanstalk.com/api/v1/auth/verifyOtp?phonenumber=91${phnNumber}&code=${otp}`);
       console.log(JSON.stringify(response.data));
       if(response.data.isVerified==="approved")
       {
-        setShow(true);
+        // setShow(true);
+        ToastAndroid.show("Phone Number Verified",ToastAndroid.LONG);
       if(response.data.isUser)
       {
-        NavigationService.navigate('ForgetPassword');
-      }
-      else{
+        ToastAndroid.show("Welcome Back",ToastAndroid.SHORT);
         NavigationService.navigate('Barcode');
       }
+      else{
+        ToastAndroid.show("Please SignUp to continue",ToastAndroid.LONG);
+        NavigationService.navigate('SignupForm');
+      }
+    }
+    else{
+      ToastAndroid.show("Invalid OTP!!!",ToastAndroid.LONG);
     }
     } catch (error) {
       // handle error
@@ -50,9 +56,9 @@ const PhnVerification: React.FC<Iphn> = ({phnNumber}:Iphn) => {
     
   return (
     <>
-    <ModalShow show={show}
+    {/* <ModalShow show={show}
         handleClose={handleClose}
-        modalInput="Phone Verified" />
+        modalInput="Phone Verified" /> */}
       <KeyboardAvoidingView
       behavior="padding"
     style={styles.container}
