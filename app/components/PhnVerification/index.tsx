@@ -56,9 +56,9 @@ const PhnVerification: React.FC<Iphn> = ({ phnNumber }: Iphn) => {
       setOtpVerification(response.data.isVerified);
       setUser(response.data.isUser);
       if (response.data.isVerified === 'approved') {
-        setOtpResult('OTP has been verified');
+        setOtpResult('NUMBER VERIFIED');
       } else {
-        setOtpResult('Please enter valid OTP');
+        setOtpResult('INVALID OTP');
       }
     } catch (error) {
       // handle error
@@ -110,7 +110,7 @@ const PhnVerification: React.FC<Iphn> = ({ phnNumber }: Iphn) => {
           <View style={styles.signupcontainer}>
             <Text style={styles.acccontainer}>Not received the OTP?</Text>
 
-            <Pressable onPress={VerifyOTP}>
+            <Pressable onPress={() => VerifyOTP()}>
               <Text style={styles.signuptext}>RESEND</Text>
             </Pressable>
           </View>

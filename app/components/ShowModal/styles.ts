@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     margin: 10,
     backgroundColor: 'white',
     borderRadius: 10,
-    padding: 35,
+    padding: 10,
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: {
@@ -46,6 +46,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 15,
     textAlign: 'center',
+  },
+  crossStyle: {
+    marginLeft: '40%',
   },
 });
 

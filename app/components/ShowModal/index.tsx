@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Alert, Modal, Text, Pressable, View } from 'react-native';
+import { Alert, Modal, Text, Pressable, View, Image } from 'react-native';
 import styles from './styles';
 
 interface IModal {
@@ -18,12 +18,16 @@ const ShowModal = ({ modalVisible, handleClose, modalInput }: IModal) => {
         onRequestClose={() => handleClose()}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
+            <Pressable onPress={() => handleClose()} style={styles.crossStyle}>
+              <Image source={require('../../assets/cross.png')} />
+            </Pressable>
+            <Image source={require('../../assets/tick.png')} />
             <Text style={styles.modalText}>{modalInput}</Text>
-            <Pressable
+            {/* <Pressable
               style={[styles.button, styles.buttonClose]}
               onPress={() => handleClose()}>
               <Text style={styles.textStyle}>Close</Text>
-            </Pressable>
+            </Pressable> */}
           </View>
         </View>
       </Modal>
