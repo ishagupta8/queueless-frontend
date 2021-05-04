@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Alert, ImageBackground, KeyboardAvoidingView, Modal, View } from 'react-native';
+import { Alert, ImageBackground, KeyboardAvoidingView, Modal, ToastAndroid, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import * as loginActions from 'app/store/actions/loginActions';
@@ -27,8 +27,9 @@ const Login: React.FC = () => {
   //const onForgot = () => NavigationService.navigate('ForgotPassword');
   const onOTP = async () => {
     try{
-      const response = await axios.get(`https://qless-new.herokuapp.com/api/v1/auth/sendOtp?phonenumber=${"91"+mobileinput}&channel=sms`);
-      // Alert.alert(response.data);
+      const response = await axios.get(`http://nodejsnoq-env.eba-kfqp329m.us-east-1.elasticbeanstalk.com/api/v1/auth/sendOtp?phonenumber=${"91"+mobileinput}&channel=sms`);
+      if(response.data!="null")
+      ToastAndroid.show('OTP Sent',ToastAndroid.SHORT);
     } catch (error) {
       // handle error
       console.log("OTP not sent");
@@ -46,7 +47,7 @@ const Login: React.FC = () => {
 
   const handleMobileInput = () => {
     if(!mobileinput.trim()){
-    Alert.alert('Please Enter Valid Mobile Number');
+    ToastAndroid.show('Please Enter Valid Mobile Number',ToastAndroid.SHORT);
     }
     else{
       onOTP();

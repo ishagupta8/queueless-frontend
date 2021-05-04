@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
     alignSelf:"center",
     marginTop: '5%',
     width: '45%',
+    borderRadius: 4,
   },
 
 });
