@@ -1,5 +1,6 @@
+import { Assets } from '@react-navigation/stack';
 import React, { useState } from 'react';
-import { SafeAreaView, View, FlatList,Text, Button} from 'react-native';
+import { SafeAreaView, View, FlatList,Text, Button, EdgeInsetsPropType, Image, Pressable} from 'react-native';
 import styles from './styles';
 
 const AddressArray = [
@@ -17,9 +18,20 @@ const AddressArray = [
   },
 ];
 
-const Item = ({ title }:any) => (
+
+
+const Item = ({ title ,add1,add2}:any) => (
   <View style={styles.item}>
+     {/* <RadioButton
+            isSelected={this.state.selectedIndex == index }
+            onPress={() => {this.onPress(index)}}
+          />  */}
+    <View style={{flexDirection:'row'}}>      
     <Text style={styles.title}>{title}</Text>
+    <Image style={styles.editimg} source={require('../../assets/edit.png')} />
+    </View>
+    <Text style={styles.addtext}>{add1}</Text>
+    <Text style={styles.addtext}>{add2}</Text>
   </View>
 );
 
@@ -33,7 +45,11 @@ const Address = () => {
     setAdd(newAddressArray);
   }
   const renderItem = ({ item }:any) => (
-    <Item title={item.title} />
+      
+    <Item title={item.title} 
+    add1={item.add1}
+    add2={item.add2}/>
+    
   );
 
   return (
@@ -42,10 +58,14 @@ const Address = () => {
         data={AddressArray}
         renderItem={renderItem}
         keyExtractor={item => item.id}
+        extraData={AddressArray}
       />
-       <Button
-          title="Add element"
-          onPress={addAddress} />
+      
+       <Pressable
+              style={styles.proceedbutton}
+              >
+              <Text style={styles.textStyle}>PROCEED</Text>
+            </Pressable>
     </SafeAreaView>
   );
 }

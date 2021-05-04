@@ -21,6 +21,7 @@ import styles from './styles';
 import axios from 'axios';
 import { TextInput } from 'react-native-gesture-handler';
 import CartModal from '../CartModal';
+import NavigationService from '../../navigation/NavigationService';
 
 const ScanScreen = ()=> {
   let mode = Camera.Constants.FlashMode.off;
@@ -51,6 +52,10 @@ const ScanScreen = ()=> {
       console.log(error.message);
     }
   };
+  
+  const address = () => {
+    NavigationService.navigate('Address');
+  } 
   
   const confirmItem = () => {
     setModalVisible(!modalVisible);
@@ -125,6 +130,11 @@ const ScanScreen = ()=> {
               style={styles.confirmbutton}
               onPress={() => confirmItem()}>
               <Text style={styles.textStyle}>CONFIRM</Text>
+            </Pressable>
+            <Pressable
+              style={styles.confirmbutton}
+              onPress={() => address()}>
+              <Text style={styles.textStyle}>PROCEED</Text>
             </Pressable>
           </View>
           </>
