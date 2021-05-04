@@ -3,97 +3,96 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    fontFamily:"Proxima Nova",
-    backgroundColor:"#ffffff",
-    alignItems:'center',
-    justifyContent:"center",
+    fontFamily: 'Proxima Nova',
+    backgroundColor: '#ffffff',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 
   imgcontainer: {
-    marginTop:'10%',
+    marginTop: '10%',
     height: '80%',
     width: '100%',
   },
-  textcontainer :{
-    color: "#2CC980",
+  textcontainer: {
+    color: '#2CC980',
     fontSize: 22,
-    fontWeight: "bold",
-    textAlign: "center",
-
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
   mobilecontainer: {
-    textAlign: "center",
+    textAlign: 'center',
     fontSize: 18,
-    marginTop:'20%',
+    marginTop: '20%',
   },
-  inputcontainer:{
-    borderRadius:5,
-    borderColor:"#D6D6D6", 
-    fontSize:20,
-    letterSpacing:2,
-    borderWidth:1,
-    marginRight:30,
-    justifyContent:"center",
-    padding:10,
-  },
-
-  acccontainer:{
-    fontSize:12,
-    color:"#848685",
-    textAlign:"left",
+  inputcontainer: {
+    borderRadius: 5,
+    borderColor: '#D6D6D6',
+    fontSize: 20,
+    letterSpacing: 2,
+    borderWidth: 1,
+    marginRight: 30,
+    justifyContent: 'center',
+    padding: 10,
   },
 
-  signuptext:{
-    fontSize:16,
-    color:"#139A5B",
-    textAlign:"left",
-    marginLeft:15,
-    fontWeight:"bold"
-},
+  acccontainer: {
+    fontSize: 12,
+    color: '#848685',
+    textAlign: 'left',
+  },
 
-signupcontainer:{
-flexDirection:'row',
-paddingTop:"10%",
-alignSelf:"center",
-},
+  signuptext: {
+    fontSize: 16,
+    color: '#139A5B',
+    textAlign: 'left',
+    marginLeft: 15,
+    fontWeight: 'bold',
+  },
 
-otpcontainer:{
-    flexDirection:'row',
-    paddingTop:"10%",
-    marginLeft:"20%",
-    },
-otpbutton: {
-  alignSelf:"center",
-  paddingTop: '20%',
-  width: '45%',
-},
-borderStyleBase: {
-  width: 30,
-  height: 45,
-  borderRadius:5,
-  borderColor:"#D6D6D6", 
-  fontSize:20,
-  letterSpacing:2,
-  borderWidth:1,
-  marginRight:30,
-  justifyContent:"center",
-  padding:10,
-},
+  signupcontainer: {
+    flexDirection: 'row',
+    paddingTop: '10%',
+    alignSelf: 'center',
+  },
 
-borderStyleHighLighted: {
-  borderColor:"#D6D6D6", 
-},
+  otpcontainer: {
+    flexDirection: 'row',
+    paddingTop: '10%',
+    marginLeft: '20%',
+  },
+  otpbutton: {
+    alignSelf: 'center',
+    paddingTop: '20%',
+    width: '45%',
+  },
+  borderStyleBase: {
+    width: 30,
+    height: 45,
+    borderRadius: 5,
+    borderColor: '#D6D6D6',
+    fontSize: 20,
+    letterSpacing: 2,
+    borderWidth: 1,
+    marginRight: 30,
+    justifyContent: 'center',
+    padding: 10,
+  },
 
-underlineStyleBase: {
-  width: 30,
-  height: 45,
-  borderWidth: 0,
-  borderBottomWidth: 1,
-},
+  borderStyleHighLighted: {
+    borderColor: '#D6D6D6',
+  },
 
-underlineStyleHighLighted: {
-  borderColor: "#03DAC6",
-},
+  underlineStyleBase: {
+    width: 30,
+    height: 45,
+    borderWidth: 0,
+    borderBottomWidth: 1,
+  },
+
+  underlineStyleHighLighted: {
+    borderColor: '#03DAC6',
+  },
 });
 
 export default styles;
