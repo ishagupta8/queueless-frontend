@@ -103,12 +103,11 @@ const PhnVerification: React.FC<Iphn> = ({phnNumber}:Iphn) => {
       <View style={styles.signupcontainer}>
         <Text style={styles.acccontainer}>Not received the OTP?</Text>
   
-        <Pressable onPress={VerifyOTP}>
+        <Pressable onPress={()=>VerifyOTP()}>
         <Text style={styles.signuptext}>RESEND</Text>
         </Pressable>
         </View>
         </ImageBackground>
-  
       </KeyboardAvoidingView>
       </>
   );

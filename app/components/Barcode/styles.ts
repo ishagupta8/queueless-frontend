@@ -68,6 +68,7 @@ const styles = StyleSheet.create({
       alignSelf:"center",
       marginTop:"8%",
       width: '45%',
+      borderRadius: 4,
     },
     scannerimg:{
       height:"100%",
