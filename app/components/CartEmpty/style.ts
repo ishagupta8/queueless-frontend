@@ -3,17 +3,10 @@ import {StatusBar, StyleSheet} from 'react-native';
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      marginTop: StatusBar.currentHeight || 0,
-      maxHeight:"40%",
-      width:"100%"
+      alignContent:"center",
 
     },
-    item: {
-      backgroundColor: '#FFFFFF',
-      padding: 20,
-      marginVertical: 8,
-      marginHorizontal: 16,
-    },
+    
     title: {
       fontSize: 14,
       fontWeight:"bold",
