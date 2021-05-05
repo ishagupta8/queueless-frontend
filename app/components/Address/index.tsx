@@ -39,6 +39,9 @@ const Address = () => {
     const editAddress = () => {
       NavigationService.navigate('AddressForm',{buttontext:"UPDATE"});
     }
+    const openCart = () => {
+      NavigationService.navigate('CartEmpty');
+    }
     
     const Item = ({ title,add1,add2,checked}:Iadd) => {
 
@@ -101,6 +104,7 @@ const Address = () => {
             </Pressable> 
        <Pressable
               style={styles.proceedbutton}
+              onPress={()=>openCart()}
               >
               <Text style={styles.textStyle}>PROCEED</Text>
             </Pressable>

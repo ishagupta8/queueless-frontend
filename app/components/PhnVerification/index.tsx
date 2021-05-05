@@ -31,6 +31,7 @@ const PhnVerification: React.FC<Iphn> = ({ phnNumber }: Iphn) => {
   const [user, setUser] = useState(Boolean);
   const [otpResult, setOtpResult] = useState('');
 
+  console.log("phn number",phnNumber);
   //To close modal and navigate to sign up or home screen
   const handleClose = () => {
     setModalVisible(!modalVisible);
