@@ -28,6 +28,7 @@ const Login: React.FC = () => {
   const onOTP = async () => {
     try{
       const response = await axios.get(`http://nodejsnoq-env.eba-kfqp329m.us-east-1.elasticbeanstalk.com/api/v1/auth/sendOtp?phonenumber=${mobileinput}&channel=sms`);
+      console.log(response.data);
       if(response.data!="null")
       ToastAndroid.show('OTP Sent',ToastAndroid.SHORT);
     } catch (error) {

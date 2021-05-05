@@ -65,15 +65,28 @@ const styles = StyleSheet.create({
       fontFamily:"Proxima Nova",
     },
     confirmbutton: {
+      alignContent: 'flex-end',
+      borderRadius: 5,
+      padding: 10,
+      paddingRight: 30,
+      paddingLeft: 30,
+      elevation: 2,
+      backgroundColor:'#0DB165',
+      width:"45%",
       alignSelf:"center",
-      marginTop:"8%",
-      width: '45%',
-      borderRadius: 4,
-    },
+      marginTop:"15%",
+      },
+    
     scannerimg:{
       height:"100%",
       width:"65%"
-    }
+    },
+    textStyle: {
+      fontSize: 16,
+      color: 'white',
+      fontWeight: 'bold',
+      textAlign: 'center',
+    },
   
   });
 

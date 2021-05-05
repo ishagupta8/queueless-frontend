@@ -15,6 +15,9 @@ import Barcode from '../components/Barcode';
 import getSession from '../services/getSession';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import Address from '../components/Address';
+import AddressForm from '../components/AddressForm';
+import CartEmpty from '../components/CartEmpty';
 
 
 const Stack = createStackNavigator();
@@ -93,6 +96,9 @@ const AuthNavigator = () => {
 const LoggedInNavigator = () => (
   <LoggedInStack.Navigator>
     <Stack.Screen name="Barcode" component={Barcode} />
+    <Stack.Screen name="Address" component={Address} />
+    <Stack.Screen name="AddressForm" component={AddressForm} />
+    <Stack.Screen name="CartEmpty" component={CartEmpty} />
   </LoggedInStack.Navigator>
 );
 

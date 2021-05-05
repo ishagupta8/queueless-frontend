@@ -11,7 +11,8 @@ import {
   Button,
   KeyboardAvoidingView,
   ImageBackgroundBase,
-  Dimensions
+  Dimensions,
+  Pressable
 } from 'react-native';
 
 import QRCodeScanner from 'react-native-qrcode-scanner';
@@ -19,6 +20,8 @@ import { RNCamera as Camera} from 'react-native-camera';
 import styles from './styles';
 import axios from 'axios';
 import { TextInput } from 'react-native-gesture-handler';
+import CartModal from '../CartModal';
+import NavigationService from '../../navigation/NavigationService';
 
 const ScanScreen = ()=> {
   let mode = Camera.Constants.FlashMode.off;
@@ -26,6 +29,7 @@ const ScanScreen = ()=> {
   const [flash,setFlash] = useState(mode);
   const [flashtext, setFlashText] = useState('TURN ON FLASH');
   const [flashFlag,setFlashFLag]  = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
   const SCREEN_HEIGHT = (Dimensions.get("window").height);
   const onSuccess = async (e:any) => {
     const check = e.data;
@@ -49,8 +53,15 @@ const ScanScreen = ()=> {
     }
   };
   
-  const addtocart =()=>{
-    Alert.alert("added to cart")
+  const address = () => {
+    NavigationService.navigate('Address');
+  } 
+  
+  const confirmItem = () => {
+    setModalVisible(!modalVisible);
+  }
+  const handleClose = () => {
+    setModalVisible(!modalVisible);
   }
 
   const flashChange = () =>{
@@ -102,15 +113,29 @@ const ScanScreen = ()=> {
 
 
 }
+   />
+    <CartModal
+            modalVisible={modalVisible}
+            handleClose={handleClose}
+            modalInput1={"Lays classic"}
+            modalInput2={"25/-"}
+            buttontext={"ADD TO CART"}
+          />
 
-    />
       <View style={styles.container2}>
           <Text style={styles.producttext}>OR</Text>
           <TextInput style={styles.inputcontainer}
           placeholder="enter barcode number"></TextInput>
-          <View style={styles.confirmbutton}>
-          <Button title="CONFIRM" color="#0DB165" onPress={addtocart}/>
-          </View>
+           <Pressable
+              style={styles.confirmbutton}
+              onPress={() => confirmItem()}>
+              <Text style={styles.textStyle}>CONFIRM</Text>
+            </Pressable>
+            <Pressable
+              style={styles.confirmbutton}
+              onPress={() => address()}>
+              <Text style={styles.textStyle}>PROCEED</Text>
+            </Pressable>
           </View>
           </>
          
