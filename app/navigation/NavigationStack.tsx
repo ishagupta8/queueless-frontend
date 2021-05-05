@@ -14,6 +14,9 @@ import VirtualCart from 'app/screens/VirtualCart';
 import { ILoginState } from 'app/models/reducers/login';
 import SignupForm from '../components/SignupForm';
 import Barcode from '../components/Barcode';
+import Address from '../components/Address';
+import AddressForm from '../components/AddressForm';
+import CartEmpty from '../components/CartEmpty';
 import getSession from '../services/getSession';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
@@ -114,7 +117,7 @@ const HomeScreens = () => (
           <Pressable
             onPress={() => NavigationService.navigate('VirtualCart')}
             style={{ padding: 20 }}>
-            <Image source={require('../assets/cart.png')} />
+            <Image source={require('../assets/cartIcon.png')} />
           </Pressable>
         ),
       }}
@@ -133,6 +136,9 @@ const HomeScreens = () => (
         ),
       }}
     />
+    <Stack.Screen name="Address" component={Address} />
+    <Stack.Screen name="AddressForm" component={AddressForm} />
+    <Stack.Screen name="CartEmpty" component={CartEmpty} />
   </LoggedInStack.Navigator>
 );
 
@@ -161,7 +167,7 @@ const App: React.FC<IProps> = (props: IProps) => {
       if (userSession.data.data !== 'nothing') setflag(true);
 
       console.log('session', userSession.data.data);
-      console.log('flag', flag);
+      console.log('flagggg', flag);
     };
 
     session();

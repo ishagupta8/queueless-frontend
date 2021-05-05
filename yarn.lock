@@ -5566,6 +5566,11 @@
   "resolved" "https://registry.npmjs.org/react-is/-/react-is-17.0.2.tgz"
   "version" "17.0.2"
 
+"react-native-bouncy-checkbox@^2.1.0":
+  "integrity" "sha512-8faw0mBhUcSL9ndqbQ5IcHjSZ7Gf4gf7e6QBdHPcwVxbRIiPZbCdzRK5msQSmL5Wh18RNWIv6KBDJqTng3aI9A=="
+  "resolved" "https://registry.npmjs.org/react-native-bouncy-checkbox/-/react-native-bouncy-checkbox-2.1.0.tgz"
+  "version" "2.1.0"
+
 "react-native-camera@^3.43.6", "react-native-camera@>=1.0.2":
   "integrity" "sha512-O6BDl0Rzsmbh4LF/4GqokIA6Q1tyhx0IlZuQ5wVKnKsGgZp/JAxF9W/2dsPjd5KyL8TgXEgpK0mqOjxd9lP5iw=="
   "resolved" "https://registry.npmjs.org/react-native-camera/-/react-native-camera-3.43.6.tgz"
@@ -5581,6 +5586,11 @@
     "flow-parser" "^0.121.0"
     "jscodeshift" "^0.11.0"
     "nullthrows" "^1.1.1"
+
+"react-native-dynamic-vector-icons@>= 0.2.1":
+  "integrity" "sha512-c+uxIphgMlJnjluleJw3nzww3UGVg/STUoRBmbFEFzy/LwQXOJHYJXsdsLRu4I1FcV7jK4A/8BMZBO4fFqFPTw=="
+  "resolved" "https://registry.npmjs.org/react-native-dynamic-vector-icons/-/react-native-dynamic-vector-icons-1.1.4.tgz"
+  "version" "1.1.4"
 
 "react-native-gesture-handler@*", "react-native-gesture-handler@^1.10.3", "react-native-gesture-handler@>= 1.0.0":
   "integrity" "sha512-cBGMi1IEsIVMgoox4RvMx7V2r6bNKw0uR1Mu1o7NbuHS6BRSVLq0dP34l2ecnPlC+jpWd3le6Yg1nrdCjby2Mw=="
@@ -5644,7 +5654,7 @@
   "resolved" "https://registry.npmjs.org/react-native-simple-radio-button/-/react-native-simple-radio-button-2.7.4.tgz"
   "version" "2.7.4"
 
-"react-native@*", "react-native@^0.60.6 || ^0.61.5 || ^0.62.2 || ^0.63.2 || ^0.64.0 || 1000.0.0", "react-native@>=0.42.0", "react-native@>=0.57", "react-native@>=0.59", "react-native@>=0.60.0", "react-native@>=0.64.0-rc.0 || 0.0.0-*", "react-native@0.64.0":
+"react-native@*", "react-native@^0.60.6 || ^0.61.5 || ^0.62.2 || ^0.63.2 || ^0.64.0 || 1000.0.0", "react-native@>= 0.55.x", "react-native@>=0.42.0", "react-native@>=0.57", "react-native@>=0.59", "react-native@>=0.60.0", "react-native@>=0.64.0-rc.0 || 0.0.0-*", "react-native@0.64.0":
   "integrity" "sha512-8dhSHBthgGwAjU+OjqUEA49229ThPMQH7URH0u8L0xoQFCnZO2sZ9Wc6KcbxI0x9KSmjCMFFZqRe3w3QsRv64g=="
   "resolved" "https://registry.npmjs.org/react-native/-/react-native-0.64.0.tgz"
   "version" "0.64.0"
@@ -5717,7 +5727,7 @@
     "react-shallow-renderer" "^16.13.1"
     "scheduler" "^0.20.1"
 
-"react@*", "react@^16.0", "react@^16.0.0 || ^17.0.0", "react@^16.8", "react@^16.8.0 || ^17.0.0", "react@^16.8.3 || ^17", "react@>=16.8.6", "react@17.0.1":
+"react@*", "react@^16.0", "react@^16.0.0 || ^17.0.0", "react@^16.8", "react@^16.8.0 || ^17.0.0", "react@^16.8.3 || ^17", "react@>= 16.x.x", "react@>=16.8.6", "react@17.0.1":
   "integrity" "sha512-lG9c9UuMHdcAexXtigOZLX8exLWkW0Ku29qPRU8uhF2R9BN96dLCt0psvzPLlHc5OWkgymP3qwTRgbnw5BKx3w=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.1.tgz"
   "version" "17.0.1"
