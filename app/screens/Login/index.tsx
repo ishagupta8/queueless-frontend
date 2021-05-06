@@ -9,9 +9,7 @@ import {
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
-import * as loginActions from 'app/store/actions/loginActions';
 import styles from './styles';
-import { ILoginState } from 'app/models/reducers/login';
 import NavigationService from 'app/navigation/NavigationService';
 import { Text, Button } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
@@ -20,9 +18,7 @@ import PhnVerification from '../../components/PhnVerification';
 import axios from 'axios';
 import SignupForm from '../../components/SignupForm';
 
-interface IState {
-  loginReducer: ILoginState;
-}
+
 
 const Login: React.FC = () => {
   // const id = useSelector((state: IState) => state.loginReducer.id);
@@ -30,7 +26,7 @@ const Login: React.FC = () => {
   const [isMobile, setIsMobile] = useState(true);
   const [mobileinput, setMobileInput] = useState('');
   const dispatch = useDispatch();
-  const onLogin = () => dispatch(loginActions.requestLogin('test', '1234'));
+  //const onLogin = () => dispatch(loginActions.requestLogin('test', '1234'));
   //const onForgot = () => NavigationService.navigate('ForgotPassword');
   const onOTP = async () => {
     try {

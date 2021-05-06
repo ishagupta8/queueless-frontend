@@ -51,6 +51,7 @@ const ScanScreen = ()=> {
   const [name,setName] = useState('');
   const [price,setPrice] = useState('');
   const [max_qty,setMax_Qty] = useState('');
+  const [item_qty,setItem_Qty] = useState(1);
 
   const SCREEN_HEIGHT = (Dimensions.get("window").height);
 
@@ -59,6 +60,8 @@ const ScanScreen = ()=> {
     image:image,
     price:price,
     max_qty:max_qty,
+    sku:code,
+    item_qty:item_qty,
   }
 
   const onSuccess = async (e:any) => {
@@ -84,6 +87,7 @@ const ScanScreen = ()=> {
       setName(response.data.name);
       setPrice(response.data.price);
       setMax_Qty(response.data.max_qty);
+      setItem_Qty(item_qty);
     } catch (error) {
       // handle error
       console.log(error.message);
@@ -92,26 +96,19 @@ const ScanScreen = ()=> {
   
   console.log(Item);
 
-//   useEffect(() => {
-//     console.log("*****************************");
-//     console.log(Item);
-//     console.log(itemFlag);
-//     if(itemFlag)
-//     {
-//       console.log("inside useeffect");
-//       const Product = Object.assign(Items,{
-//       name: name,
-//       image:image,
-//       price:price,
-//       max_qty:max_qty,
-
-//     });
-//     console.log("scanned product",Product)
-//     dispatch(addToCart(Product));
-//     setItemFlag(false);
-//   }
-//   console.log("final store cart",Items);  
-// },[]);
+  useEffect(() => {
+    console.log("*****************************");
+    console.log(Item);
+    console.log("scan flag",itemFlag);
+    if(itemFlag)
+    {
+      console.log("inside useeffect");
+      dispatch(addToCart(Item));
+    console.log("&&&&&&&&&&&&&&&",Items);
+    setItemFlag(false);
+  }
+  console.log("final store cart",Items);  
+},[itemFlag]);
   
   const address = () => {
     NavigationService.navigate('Address');
@@ -125,8 +122,7 @@ const ScanScreen = ()=> {
   }
 
   const addItemToCart = () => {
-    dispatch(addToCart(Item));
-    console.log("&&&&&&&&&&&&&&&",Items);
+    setItemFlag(true);
   }
   
 
@@ -195,7 +191,7 @@ const ScanScreen = ()=> {
           placeholder="enter barcode number"></TextInput>
            <Pressable
               style={styles.confirmbutton}
-              onPress={() => addItemToCart()}>
+              onPress={() => confirmItem()}>
               <Text style={styles.textStyle}>CONFIRM</Text>
             </Pressable>
             <Pressable

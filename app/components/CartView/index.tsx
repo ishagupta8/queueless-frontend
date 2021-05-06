@@ -9,6 +9,7 @@ import RadioForm, {
 import CartItem from '../CartItem';
 import styles from './styles';
 import AppButton from 'app/components/Button';
+import { useDispatch, useSelector } from 'react-redux';
 
 var radio_props = [
   { label: 'Pickup', value: 0 },
@@ -17,14 +18,15 @@ var radio_props = [
 
 export default function CartView() {
   //To get the state of the delivery option selected
+  const Items = useSelector((state:any) => state.products);
+  const dispatch = useDispatch();
+
   const [delivery, setDelivery] = useState(1);
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
         <View>
-          <CartItem />
-          <CartItem />
-          <CartItem />
+          {Items.map((item) => <CartItem thing={item}  key={item.sku}/>)}
         </View>
 
         <View>
