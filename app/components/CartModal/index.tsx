@@ -8,10 +8,11 @@ interface IModal {
   modalInput1: string;
   modalInput2: string;
   buttontext:string;
+  addItemToCart: () => void;
 
 }
 
-const CartModal = ({ modalVisible, handleClose, modalInput1,modalInput2,buttontext }: IModal) => {
+const CartModal = ({ modalVisible, handleClose, modalInput1,modalInput2,buttontext,addItemToCart }: IModal) => {
   return (
     <View style={styles.centeredView}>
       <Modal
@@ -28,7 +29,7 @@ const CartModal = ({ modalVisible, handleClose, modalInput1,modalInput2,buttonte
             <Text style={styles.modalText}>{''}{modalInput2}</Text>
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => handleClose()}>
+              onPress={() => addItemToCart()}>
               <Text style={styles.textStyle}>{buttontext}</Text>
             </Pressable>
           </View>

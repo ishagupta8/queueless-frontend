@@ -31,7 +31,7 @@ const PhnVerification: React.FC<Iphn> = ({ phnNumber }: Iphn) => {
   const [user, setUser] = useState(Boolean);
   const [otpResult, setOtpResult] = useState('');
 
-  console.log("phn number",phnNumber);
+  console.log('phn number', phnNumber);
   //To close modal and navigate to sign up or home screen
   const handleClose = () => {
     setModalVisible(!modalVisible);
@@ -39,7 +39,7 @@ const PhnVerification: React.FC<Iphn> = ({ phnNumber }: Iphn) => {
       if (user) {
         NavigationService.navigate('Barcode');
       } else {
-        NavigationService.navigate('SignupForm',{phnNumber:phnNumber});
+        NavigationService.navigate('SignupForm', { phnNumber: phnNumber });
       }
     }
   };
@@ -58,7 +58,6 @@ const PhnVerification: React.FC<Iphn> = ({ phnNumber }: Iphn) => {
       setUser(response.data.isUser);
       if (response.data.isVerified === 'approved') {
         setOtpResult('NUMBER VERIFIED');
-        
       } else {
         setOtpResult('INVALID OTP');
       }
@@ -67,7 +66,6 @@ const PhnVerification: React.FC<Iphn> = ({ phnNumber }: Iphn) => {
       console.log(error.message);
     }
   };
-
   return (
     <>
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
