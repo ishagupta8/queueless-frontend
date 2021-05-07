@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { decrementItem, incrementItem, removeFromCart } from '../../redux/Actions/cartAction';
 import styles from './styles';
 
-export default function CartItem({thing,removeItem}) {
+export default function CartItem({thing,removeItem,getPrice}) {
   const {name,image,max_qty,sku,price,item_qty} = thing;
   const Items = useSelector((state:any) => state.products);
   const dispatch = useDispatch();
@@ -37,8 +37,8 @@ export default function CartItem({thing,removeItem}) {
           buttonFontSize={20}
           value={item_qty}
           onChange={num => setnum(num)}
-          onIncrease={()=>dispatch(incrementItem(thing))}
-          onDecrease={()=>dispatch(decrementItem(thing))}
+          onIncrease={()=>{dispatch(incrementItem(thing)),getPrice()}}
+          onDecrease={()=>{dispatch(decrementItem(thing)),getPrice()}}
           onMin={()=>removeItem(thing)}
           onMax={()=>Alert.alert("max qty")}
           background={'#E8F5E9'}

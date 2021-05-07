@@ -24,9 +24,17 @@ export default function CartView() {
   const Items = useSelector((state:any) => state.products);
   const [modalVisible, setModalVisible] = useState(false);
   const [itemFlag,setItemFlag] = useState(false); 
-  const [showEmpty, setShowEmpty] = useState(false);
-  const [showCart,setShowCart] = useState(true);
+  const [totalPrice, setTotalPrice] = useState(0);
   const dispatch = useDispatch();
+
+  
+  useEffect(()=>{
+    let total=0;
+    Items.forEach(cart => total = total + (parseInt(cart.price)*cart.item_qty));
+    setTotalPrice(total);
+    console.log("total price &&&&&&&&&&&&&&&&&&&&&&&&&&&",totalPrice);
+  },[Items]);
+    
 
 //   const getCartItems = () => {
 //     if(Items.length===0)
@@ -41,9 +49,19 @@ export default function CartView() {
 //     }
 // }
   
+  const getPrice = () => {
+    let total=0;
+    Items.forEach(cart => total = total + (parseInt(cart.price)*cart.item_qty));
+    setTotalPrice(total);
+    console.log("total price &&&&&&&&&&&&&&&&&&&&&&&&&&&",totalPrice);
+
+  }
+
   const removeItem = (thing) => {
     dispatch(removeFromCart(thing))
   }
+
+
 
   const address = () => {
     NavigationService.navigate('Address');
@@ -93,7 +111,7 @@ export default function CartView() {
             addItemToCart = {ClearCartItems}
           />
         <View>
-          {Items.map((item) => <CartItem thing={item}  key={item.sku} removeItem={removeItem}/>)}
+          {Items.map((item) => <CartItem thing={item}  key={item.sku} removeItem={removeItem} getPrice={getPrice}/>)}
         </View>
 
         <View>
@@ -104,8 +122,8 @@ export default function CartView() {
                 <Text style={styles.bottomText}>Taxes</Text>
               </View>
               <View style={styles.secondContainer}>
-                <Text style={styles.topText}>₹342</Text>
-                <Text style={styles.bottomText}>₹14</Text>
+                <Text style={styles.topText}>{totalPrice}</Text>
+                <Text style={styles.bottomText}>{0.05*totalPrice}</Text>
               </View>
             </View>
             <View>
@@ -114,7 +132,7 @@ export default function CartView() {
                   <Text style={styles.totalText}>Grand Total</Text>
                 </View>
                 <View style={styles.secondContainer}>
-                  <Text style={styles.totalText}>₹331</Text>
+                  <Text style={styles.totalText}>{totalPrice+0.05*totalPrice}</Text>
                 </View>
               </View>
               <View style={styles.radioButtonView}>

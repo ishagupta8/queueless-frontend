@@ -54,7 +54,9 @@ const ScanScreen = ()=> {
   const [price,setPrice] = useState('');
   const [max_qty,setMax_Qty] = useState('');
   const [item_qty,setItem_Qty] = useState(1);
-  let textInput = useRef('');
+  const [textInput, setTextInput] = useState('');
+  
+
 
   const SCREEN_HEIGHT = (Dimensions.get("window").height);
 
@@ -93,7 +95,7 @@ const ScanScreen = ()=> {
         setMax_Qty(response.data.max_qty);
         setItem_Qty(item_qty);
         ToastAndroid.show("Product scanned sucessfully",ToastAndroid.SHORT);
-        setModalVisible(!modalVisible);
+        setModalVisible(true);
       }
 
       else{
@@ -107,6 +109,11 @@ const ScanScreen = ()=> {
     }
   };
 
+   const changeHandler = (value) => { 
+    setTextInput(value);
+    setCode(value);
+   }
+
   const onManualBarcode = async ()=>{
     try{
       const response = await axios.get(`http://nodejsnoq-env.eba-kfqp329m.us-east-1.elasticbeanstalk.com/api/v1/products/sku/get`,{params:barcode});
@@ -118,7 +125,7 @@ const ScanScreen = ()=> {
         setPrice(response.data.price);
         setMax_Qty(response.data.max_qty);
         setItem_Qty(item_qty); 
-        setModalVisible(!modalVisible);
+        setModalVisible(true);
       }
       console.log(response.data.name);
       
@@ -141,14 +148,14 @@ const ScanScreen = ()=> {
       dispatch(addToCart(Item));
     console.log("&&&&&&&&&&&&&&&",Items);
     setItemFlag(false);
-    setCode('');
+    setTextInput('');
   }
   console.log("final store cart",Items);  
 },[itemFlag]);
   
   
   const handleClose = () => {
-    setModalVisible(!modalVisible);
+    setModalVisible(false);
   }
 
   const addItemToCart = () => {
@@ -219,8 +226,8 @@ const ScanScreen = ()=> {
           <Text style={styles.producttext}>OR</Text>
           <TextInput style={styles.inputcontainer}
           placeholder="Enter Barcode Number"
-          onChangeText={(input)=>setCode(input)}
-          ></TextInput>
+          onChangeText={changeHandler} 
+          value={textInput}></TextInput>
            <Pressable
               style={styles.confirmbutton}
               onPress={() => onManualBarcode()}>
