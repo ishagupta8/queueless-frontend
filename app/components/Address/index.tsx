@@ -5,6 +5,7 @@ import BouncyCheckbox from "react-native-bouncy-checkbox";
 import NavigationService from '../../navigation/NavigationService';
 import styles from './styles';
 
+
 interface Iadd {
   title:string,
   add1:string,
@@ -34,14 +35,12 @@ const Address = () => {
     const [addAdd, setAdd] = useState(AddressArray);
 
     const addAddress = () => {
-      NavigationService.navigate('AddressForm',{buttontext:'SAVE'});
+      NavigationService.navigate('AddressForm',{buttonText:'SAVE'});
     }
     const editAddress = () => {
-      NavigationService.navigate('AddressForm',{buttontext:"UPDATE"});
+      NavigationService.navigate('AddressForm',{buttonText:"UPDATE"});
     }
-    const openCart = () => {
-      NavigationService.navigate('CartEmpty');
-    }
+    
     
     const Item = ({ title,add1,add2,checked}:Iadd) => {
 
@@ -104,7 +103,6 @@ const Address = () => {
             </Pressable> 
        <Pressable
               style={styles.proceedbutton}
-              onPress={()=>openCart()}
               >
               <Text style={styles.textStyle}>PROCEED</Text>
             </Pressable>

@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, Alert } from 'react-native';
 import InputSpinner from 'react-native-input-spinner';
-import { useDispatch } from 'react-redux';
-import { removeFromCart } from '../../redux/Actions/cartAction';
+import { useDispatch, useSelector } from 'react-redux';
+import { decrementItem, incrementItem, removeFromCart } from '../../redux/Actions/cartAction';
 import styles from './styles';
 
-export default function CartItem({thing}) {
+export default function CartItem({thing,removeItem}) {
   const {name,image,max_qty,sku,price,item_qty} = thing;
+  const Items = useSelector((state:any) => state.products);
   const dispatch = useDispatch();
   const [num, setnum] = useState(max_qty);
-  
+  console.log("cartItem&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&",Items)
   
   return (
     <View style={styles.rowContainer}>
@@ -35,9 +36,11 @@ export default function CartItem({thing}) {
           buttonTextStyle={{ padding: 1 }}
           buttonFontSize={20}
           value={item_qty}
-          onChange={num => {setnum(num)
-          if(num==0)
-          dispatch(removeFromCart(thing))}}
+          onChange={num => setnum(num)}
+          onIncrease={()=>dispatch(incrementItem(thing))}
+          onDecrease={()=>dispatch(decrementItem(thing))}
+          onMin={()=>removeItem(thing)}
+          onMax={()=>Alert.alert("max qty")}
           background={'#E8F5E9'}
           shadow={false}
           rounded={false}
@@ -46,7 +49,7 @@ export default function CartItem({thing}) {
           inputStyle={{ padding: 0 }}
           color={'#50AD6C'}
         />
-        <Text style={styles.finalPriceText}>{item_qty}*{price}</Text>
+        <Text style={styles.finalPriceText}>{item_qty*parseInt(price)}</Text>
       </View>
     </View>
   );

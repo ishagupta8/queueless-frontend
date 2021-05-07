@@ -12,7 +12,8 @@ import {
   KeyboardAvoidingView,
   ImageBackgroundBase,
   Dimensions,
-  Pressable
+  Pressable,
+  ToastAndroid
 } from 'react-native';
 
 import QRCodeScanner from 'react-native-qrcode-scanner';
@@ -81,7 +82,9 @@ const ScanScreen = ()=> {
       const response = await axios.get(`http://nodejsnoq-env.eba-kfqp329m.us-east-1.elasticbeanstalk.com/api/v1/products/sku/get`,{params:barcode});
       console.log(response.data);
       if(response.data!=null)
-      Alert.alert("Product is added to cart");
+      {
+        ToastAndroid.show("Product is added to cart",ToastAndroid.CENTER);
+      }
       console.log(response.data.name);
       setImage(response.data.image);
       setName(response.data.name);
@@ -110,9 +113,6 @@ const ScanScreen = ()=> {
   console.log("final store cart",Items);  
 },[itemFlag]);
   
-  const address = () => {
-    NavigationService.navigate('Address');
-  } 
   
   const confirmItem = () => {
     setModalVisible(!modalVisible);
@@ -179,8 +179,8 @@ const ScanScreen = ()=> {
     <CartModal
             modalVisible={modalVisible}
             handleClose={handleClose}
-            modalInput1={"Lays classic"}
-            modalInput2={"25/-"}
+            modalInput1={Item.name}
+            modalInput2={Item.price}
             buttontext={"ADD TO CART"}
             addItemToCart = {addItemToCart}
           />
@@ -194,11 +194,11 @@ const ScanScreen = ()=> {
               onPress={() => confirmItem()}>
               <Text style={styles.textStyle}>CONFIRM</Text>
             </Pressable>
-            <Pressable
+            {/* <Pressable
               style={styles.confirmbutton}
               onPress={() => address()}>
               <Text style={styles.textStyle}>PROCEED</Text>
-            </Pressable>
+            </Pressable> */}
           </View>
           </>
          

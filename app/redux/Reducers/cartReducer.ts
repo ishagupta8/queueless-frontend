@@ -1,7 +1,9 @@
 import {
     ADD_TO_CART,
     REMOVE_FROM_CART,
-    CLEAR_CART
+    CLEAR_CART,
+    INCREMENT_ITEM,
+    DECREMENT_ITEM
 } from '../constants';
 
 interface Item {
@@ -41,9 +43,33 @@ const cartReducer = (initialState:Item[]=[],action) => {
                 return initialState.concat(action.payload);
             }
         }
+
+        case INCREMENT_ITEM:
+            {
+
+                const index = initialState.findIndex(item=> item.sku===action.payload.sku); 
+                console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ incres",index);
+                initialState[index].item_qty=initialState[index].item_qty+1;
+                console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ incres",initialState[index]);
+                       
+            return  initialState;
+            }
+
+        case DECREMENT_ITEM:
+            {
+                const index = initialState.findIndex(item=> item.sku===action.payload.sku); 
+                console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ decres",index);
+                initialState[index].item_qty=initialState[index].item_qty-1;
+                console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ decres",initialState[index]);
+                       
+            return  initialState;
+                
+            }
+
         case REMOVE_FROM_CART:
             {
                 initialState = initialState.filter(Item => Item.sku !== action.payload.sku)
+                console.log("########################### remove from cart",initialState);
             return initialState
             }
 

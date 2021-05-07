@@ -26,7 +26,7 @@ const CartModal = ({ modalVisible, handleClose, modalInput1,modalInput2,buttonte
               <Image source={require('../../assets/cross.png')} />
             </Pressable>
             <Text style={styles.modalText}>{modalInput1}</Text>
-            <Text style={styles.modalText}>{''}{modalInput2}</Text>
+            <Text style={styles.modalText}>{''}{modalInput2}{'/-'}</Text>
             <Pressable
               style={[styles.button, styles.buttonClose]}
               onPress={() => addItemToCart()}>
