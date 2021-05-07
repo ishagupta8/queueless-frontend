@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { Component, useEffect, useRef, useState } from 'react';
 
 import {
   Text,
@@ -13,7 +13,8 @@ import {
   ImageBackgroundBase,
   Dimensions,
   Pressable,
-  ToastAndroid
+  ToastAndroid,
+  InputAccessoryView
 } from 'react-native';
 
 import QRCodeScanner from 'react-native-qrcode-scanner';
@@ -24,7 +25,7 @@ import { TextInput } from 'react-native-gesture-handler';
 import CartModal from '../CartModal';
 import NavigationService from '../../navigation/NavigationService';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
-import { addToCart } from '../../redux/Actions/cartAction';
+import { addToCart, clearCart } from '../../redux/Actions/cartAction';
 import { RootState } from '../../redux/Reducers';
 
 // interface Item {
@@ -53,6 +54,7 @@ const ScanScreen = ()=> {
   const [price,setPrice] = useState('');
   const [max_qty,setMax_Qty] = useState('');
   const [item_qty,setItem_Qty] = useState(1);
+  let textInput = useRef('');
 
   const SCREEN_HEIGHT = (Dimensions.get("window").height);
 
@@ -65,6 +67,10 @@ const ScanScreen = ()=> {
     item_qty:item_qty,
   }
 
+  const barcode = {
+    sku:code,
+  }
+
   const onSuccess = async (e:any) => {
     const check = e.data;
     console.log('scanned data' + check);
@@ -72,9 +78,7 @@ const ScanScreen = ()=> {
     // Linking.openURL(e.data).catch(err =>
     //   console.error('An error occured', err)
     // );
-    const barcode = {
-      sku:code,
-    }
+
 
     console.log(Item);
 
@@ -83,19 +87,47 @@ const ScanScreen = ()=> {
       console.log(response.data);
       if(response.data!=null)
       {
-        ToastAndroid.show("Product is added to cart",ToastAndroid.CENTER);
+        setImage(response.data.image);
+        setName(response.data.name);
+        setPrice(response.data.price);
+        setMax_Qty(response.data.max_qty);
+        setItem_Qty(item_qty);
+        ToastAndroid.show("Product scanned sucessfully",ToastAndroid.SHORT);
+        setModalVisible(!modalVisible);
+      }
+
+      else{
+        ToastAndroid.show("Please fill Barcode Manually",ToastAndroid.SHORT);
       }
       console.log(response.data.name);
-      setImage(response.data.image);
-      setName(response.data.name);
-      setPrice(response.data.price);
-      setMax_Qty(response.data.max_qty);
-      setItem_Qty(item_qty);
+      
     } catch (error) {
       // handle error
       console.log(error.message);
     }
   };
+
+  const onManualBarcode = async ()=>{
+    try{
+      const response = await axios.get(`http://nodejsnoq-env.eba-kfqp329m.us-east-1.elasticbeanstalk.com/api/v1/products/sku/get`,{params:barcode});
+      console.log(response.data);
+      if(response.data!=null)
+      {
+        setImage(response.data.image);
+        setName(response.data.name);
+        setPrice(response.data.price);
+        setMax_Qty(response.data.max_qty);
+        setItem_Qty(item_qty); 
+        setModalVisible(!modalVisible);
+      }
+      console.log(response.data.name);
+      
+    } catch (error) {
+      // handle error
+      console.log(error.message);
+    }
+
+  }
   
   console.log(Item);
 
@@ -109,14 +141,12 @@ const ScanScreen = ()=> {
       dispatch(addToCart(Item));
     console.log("&&&&&&&&&&&&&&&",Items);
     setItemFlag(false);
+    setCode('');
   }
   console.log("final store cart",Items);  
 },[itemFlag]);
   
   
-  const confirmItem = () => {
-    setModalVisible(!modalVisible);
-  }
   const handleClose = () => {
     setModalVisible(!modalVisible);
   }
@@ -188,10 +218,12 @@ const ScanScreen = ()=> {
       <View style={styles.container2}>
           <Text style={styles.producttext}>OR</Text>
           <TextInput style={styles.inputcontainer}
-          placeholder="enter barcode number"></TextInput>
+          placeholder="Enter Barcode Number"
+          onChangeText={(input)=>setCode(input)}
+          ></TextInput>
            <Pressable
               style={styles.confirmbutton}
-              onPress={() => confirmItem()}>
+              onPress={() => onManualBarcode()}>
               <Text style={styles.textStyle}>CONFIRM</Text>
             </Pressable>
             {/* <Pressable
@@ -205,3 +237,5 @@ const ScanScreen = ()=> {
     );
   }
 export default ScanScreen;
+
+

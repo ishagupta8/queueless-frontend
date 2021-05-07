@@ -24,8 +24,23 @@ export default function CartView() {
   const Items = useSelector((state:any) => state.products);
   const [modalVisible, setModalVisible] = useState(false);
   const [itemFlag,setItemFlag] = useState(false); 
+  const [showEmpty, setShowEmpty] = useState(false);
+  const [showCart,setShowCart] = useState(true);
   const dispatch = useDispatch();
 
+//   const getCartItems = () => {
+//     if(Items.length===0)
+//     {
+//       setShowEmpty(true);
+//       setShowCart(false);
+//     }
+
+//     else{
+//       setShowEmpty(false);
+//       setShowCart(true);
+//     }
+// }
+  
   const removeItem = (thing) => {
     dispatch(removeFromCart(thing))
   }
@@ -34,9 +49,7 @@ export default function CartView() {
     NavigationService.navigate('Address');
   } 
 
-  const openCart = () => {
-    NavigationService.navigate('CartEmpty');
-  }
+
 
   useEffect(() => {
     console.log("*****************************");
@@ -58,7 +71,7 @@ export default function CartView() {
     setModalVisible(!modalVisible);
   }
 
-  const ClearCart = () => {
+  const ClearCartItems = () => {
     setItemFlag(true);
   }
 
@@ -77,7 +90,7 @@ export default function CartView() {
             modalInput1={"Do you want"}
             modalInput2={"Empty the Cart"}
             buttontext={"OKAY"}
-            addItemToCart = {ClearCart}
+            addItemToCart = {ClearCartItems}
           />
         <View>
           {Items.map((item) => <CartItem thing={item}  key={item.sku} removeItem={removeItem}/>)}
