@@ -167,6 +167,7 @@ const App: React.FC<IProps> = (props: IProps) => {
       if (userSession.data.data !== 'nothing') setflag(true);
 
       console.log('session', userSession.data.data);
+      console.log('session', userSession.data.user_id);
       console.log('flagggg', flag);
     };
 
@@ -196,5 +197,4 @@ const App: React.FC<IProps> = (props: IProps) => {
     </>
   );
 };
-
 export default App;
