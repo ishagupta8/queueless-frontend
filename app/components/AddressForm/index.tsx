@@ -67,6 +67,25 @@ const AddressForm = ({ route }: any) => {
       console.log(error.message);
     }
   };
+
+  const postAddress = async () => {
+    try {
+      const response = await axios.post(
+        `http://nodejsnoq-env.eba-kfqp329m.us-east-1.elasticbeanstalk.com/api/v1/address`,
+        address,
+      );
+      console.log(JSON.stringify(response.data));
+      if (response.data != null) {
+        ToastAndroid.show('Address added', ToastAndroid.LONG);
+        NavigationService.navigate('Address');
+      } else {
+        ToastAndroid.show('Please try again', ToastAndroid.LONG);
+      }
+    } catch (error) {
+      // handle error
+      console.log(error.message);
+    }
+  };
   return (
     <View>
       <TextInput
