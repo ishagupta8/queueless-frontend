@@ -1,8 +1,16 @@
 import { useFocusEffect } from '@react-navigation/native';
 import { Assets } from '@react-navigation/stack';
-import axios, { AxiosResponse } from 'axios';
-import React, { useEffect, useState } from 'react';
-import { View, Text, Image, Pressable, ToastAndroid } from 'react-native';
+import axios from 'axios';
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  Image,
+  Pressable,
+  ToastAndroid,
+  SafeAreaView,
+  ScrollView,
+} from 'react-native';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import NavigationService from '../../navigation/NavigationService';
 import styles from './styles';
@@ -121,11 +129,11 @@ const Address = () => {
       <View
         style={[
           {
-            height: 24,
-            width: 24,
+            height: 16,
+            width: 16,
             borderRadius: 12,
             borderWidth: 2,
-            borderColor: '#000',
+            borderColor: '#0DB165',
             alignItems: 'center',
             justifyContent: 'center',
           },
@@ -135,10 +143,10 @@ const Address = () => {
         {item.address_id === radioBtn ? (
           <View
             style={{
-              height: 12,
-              width: 12,
+              height: 7,
+              width: 7,
               borderRadius: 6,
-              backgroundColor: '#000',
+              backgroundColor: '#0DB165',
             }}
           />
         ) : null}
@@ -150,67 +158,70 @@ const Address = () => {
     return (
       <View style={styles.item}>
         <View style={{ flexDirection: 'row' }}>
-          {/* <BouncyCheckbox
-            size={15}
-            fillColor="#0DB165"
-            unfillColor="#FFFFFF"
-            iconStyle={{ borderColor: '#0DB165' }}
-            isChecked={!checkedFlag}
-            onPress={() => setCheckedFlag(!checkedFlag)}
-          /> */}
+          <View style={styles.radioBtnContainer}>
+            <Pressable onPress={() => setRadioBtn(item.address_id)}>
+              {RadioButton(item)}
+            </Pressable>
+          </View>
 
-          <Pressable onPress={() => setRadioBtn(item.address_id)}>
-            {RadioButton(item)}
-          </Pressable>
+          <View style={styles.addressConatainer}>
+            <Text style={styles.title} numberOfLines={1}>
+              {building}
+            </Text>
+            <Text style={styles.addtext}>
+              {street}
+              {', '}
+              {city}
+            </Text>
+            <Text style={styles.addtext}>
+              {state}
+              {'-'}
+              {pincode}
+            </Text>
+          </View>
 
-          <Text style={styles.title}>{building}</Text>
-          <Pressable onPress={() => deleteAddress(item)}>
-            <Image
-              style={styles.delimg}
-              source={require('../../assets/delete.png')}
-            />
-          </Pressable>
-          <Pressable onPress={() => editAddress(item)}>
-            <Image source={require('../../assets/edit.png')} />
-          </Pressable>
+          <View style={styles.editDeleteContainer}>
+            <Pressable onPress={() => deleteAddress(item)}>
+              <Image
+                style={styles.delimg}
+                source={require('../../assets/delete.png')}
+              />
+            </Pressable>
+            <Pressable onPress={() => editAddress(item)}>
+              <Image source={require('../../assets/edit.png')} />
+            </Pressable>
+          </View>
         </View>
-        <Text style={styles.addtext}>
-          {street}
-          {', '}
-          {city}
-        </Text>
-        <Text style={styles.addtext}>
-          {state}
-          {'-'}
-          {pincode}
-        </Text>
       </View>
     );
   };
 
   return (
     <>
-      <View style={styles.container}>
-        {console.log('addressFlag inside return', addressFlag)}
-        {console.log('addressList inside return', addressList)}
-        {console.log('count in return', count)}
+      <ScrollView style={styles.scrollView}>
+        <View style={styles.container}>
+          {console.log('addressFlag inside return', addressFlag)}
+          {console.log('addressList inside return', addressList)}
+          {console.log('count in return', count)}
 
-        {addressFlag &&
-          addressList.map((item, key) => (
-            <Item
-              item={item}
-              street={item.street}
-              building={item.building}
-              pincode={item.pincode}
-              city={item.city}
-              state={item.state}
-            />
-          ))}
-      </View>
-      <Pressable style={styles.Addressbutton} onPress={() => addAddress()}>
-        <Image source={require('../../assets/addressimg.png')} />
-        <Text style={styles.addresstext}>ADD ADDRESS</Text>
-      </Pressable>
+          {addressFlag &&
+            addressList.map((item, key) => (
+              <Item
+                item={item}
+                street={item.street}
+                building={item.building}
+                pincode={item.pincode}
+                city={item.city}
+                state={item.state}
+              />
+            ))}
+        </View>
+        <Pressable style={styles.Addressbutton} onPress={() => addAddress()}>
+          <Image source={require('../../assets/addressimg.png')} />
+          <Text style={styles.addresstext}>ADD ADDRESS</Text>
+        </Pressable>
+      </ScrollView>
+
       <Pressable style={styles.proceedbutton} onPress={() => openCart()}>
         <Text style={styles.textStyle}>PROCEED</Text>
       </Pressable>
