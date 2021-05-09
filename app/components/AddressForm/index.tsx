@@ -13,15 +13,18 @@ import styles from './styles';
 import NavigationService from '../../navigation/NavigationService';
 
 const AddressForm = ({ route }: any) => {
-  const { buttonText } = route.params;
+  const { buttonText, UserAddress } = route.params;
   console.log('button', buttonText);
-  const [title, setTitle] = useState('');
-  const [building, setBuilding] = useState('');
-  const [street, setStreet] = useState('');
-  const [city, setCity] = useState('');
-  const [state, setState] = useState('');
-  const [pinCode, setPinCode] = useState('');
-  const [userId, setUserId] = useState('');
+  const [building, setBuilding] = useState(
+    UserAddress ? UserAddress.building : '',
+  );
+  const [street, setStreet] = useState(UserAddress ? UserAddress.street : '');
+  const [city, setCity] = useState(UserAddress ? UserAddress.city : '');
+  const [state, setState] = useState(UserAddress ? UserAddress.state : '');
+  const [pinCode, setPinCode] = useState(
+    UserAddress ? UserAddress.pincode : '',
+  );
+  const [userId, setUserId] = useState(UserAddress ? UserAddress.userId : '');
 
   //To get the user ID from current session
   useEffect(() => {
@@ -39,6 +42,14 @@ const AddressForm = ({ route }: any) => {
     session();
   }, []);
 
+  //Decide for add or update
+  const decideFunction = () => {
+    if (buttonText === 'SAVE') {
+      addAddress();
+    } else {
+      putAddress();
+    }
+  };
   //To add a address
   const address = {
     building: building,
@@ -68,15 +79,16 @@ const AddressForm = ({ route }: any) => {
     }
   };
 
-  const postAddress = async () => {
+  //Edit address
+  const putAddress = async () => {
     try {
-      const response = await axios.post(
-        `http://nodejsnoq-env.eba-kfqp329m.us-east-1.elasticbeanstalk.com/api/v1/address`,
+      const response = await axios.put(
+        `http://nodejsnoq-env.eba-kfqp329m.us-east-1.elasticbeanstalk.com/api/v1/address/${UserAddress.address_id}`,
         address,
       );
       console.log(JSON.stringify(response.data));
       if (response.data != null) {
-        ToastAndroid.show('Address added', ToastAndroid.LONG);
+        ToastAndroid.show('Address updated', ToastAndroid.LONG);
         NavigationService.navigate('Address');
       } else {
         ToastAndroid.show('Please try again', ToastAndroid.LONG);
@@ -90,36 +102,36 @@ const AddressForm = ({ route }: any) => {
     <View>
       <TextInput
         style={styles.inputcontainer}
-        placeholder="Label / Title"
-        onChangeText={input => setTitle(input)}
-      />
-      <TextInput
-        style={styles.inputcontainer}
         placeholder="Door No. & Building Name"
+        value={building}
         onChangeText={input => setBuilding(input)}
       />
       <TextInput
         style={styles.inputcontainer}
         placeholder="Street Name"
+        value={street}
         onChangeText={input => setStreet(input)}
       />
       <TextInput
         style={styles.inputcontainer}
         placeholder="Area / City"
+        value={city}
         onChangeText={input => setCity(input)}
       />
       <TextInput
         style={styles.inputcontainer}
         placeholder="State"
+        value={state}
         onChangeText={input => setState(input)}
       />
       <TextInput
         style={styles.inputcontainer}
         placeholder="PIN Code"
+        value={pinCode}
         onChangeText={input => setPinCode(input)}
       />
 
-      <Pressable style={styles.savebutton} onPress={() => addAddress()}>
+      <Pressable style={styles.savebutton} onPress={() => decideFunction()}>
         <Text style={styles.textStyle}>{buttonText}</Text>
       </Pressable>
     </View>
