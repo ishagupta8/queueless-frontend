@@ -162,6 +162,7 @@ const ScanScreen = ()=> {
     setItemFlag(true);
   }
   
+  
 
   const flashChange = () =>{
     if(flashFlag===false)
@@ -235,7 +236,7 @@ const ScanScreen = ()=> {
             </Pressable>
             {/* <Pressable
               style={styles.confirmbutton}
-              onPress={() => address()}>
+              onPress={() => open()}>
               <Text style={styles.textStyle}>PROCEED</Text>
             </Pressable> */}
           </View>

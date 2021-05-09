@@ -8,7 +8,6 @@ import NavigationService from 'app/navigation/NavigationService';
 
 import Login from 'app/screens/Login';
 import Home from 'app/screens/Home';
-import ForgotPassword from 'app/screens/ForgotPassword';
 import MainLogin from 'app/screens/MainLogin';
 import VirtualCart from 'app/screens/VirtualCart';
 import SignupForm from '../components/SignupForm';
@@ -20,17 +19,12 @@ import getSession from '../services/getSession';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Image, Pressable } from 'react-native';
+import storeDetails from '../components/storeDetails';
 
 const Stack = createStackNavigator();
 const AuthStack = createStackNavigator();
 const LoggedInStack = createStackNavigator();
 
-const homeOptions = {
-  title: 'Home',
-  headerTitleStyle: {
-    fontWeight: 'bold',
-  },
-};
 
 
 const AuthNavigator = () => {
@@ -49,11 +43,7 @@ const AuthNavigator = () => {
         component={Login}
         
       />
-      <Stack.Screen
-        name="ForgotPassword"
-        component={ForgotPassword}
-        
-      />
+
       <Stack.Screen
         name="SignupForm"
         component={SignupForm}
@@ -64,6 +54,7 @@ const AuthNavigator = () => {
         component={HomeScreens}
         
       />
+      
     </AuthStack.Navigator>
   );
 };
@@ -81,6 +72,15 @@ const HomeScreens = () => (
       },
       headerTintColor: '#2CC980',
     }}>
+     
+     <Stack.Screen 
+     name="storeDetails" 
+     component={Home} 
+     options={{
+      headerTitle: 'NoQ'
+     }}
+     /> 
+     
     <Stack.Screen
       name="Barcode"
       component={Barcode}
@@ -111,6 +111,9 @@ const HomeScreens = () => (
     />
     <Stack.Screen name="Address" component={Address} />
     <Stack.Screen name="AddressForm" component={AddressForm} />
+    {/* <Stack.Screen name="storeDetails" component={storeDetails} /> */}
+    
+    
   </LoggedInStack.Navigator>
 );
 
@@ -119,7 +122,7 @@ const LoggedInNavigator = () => (
     screenOptions={{
       headerShown: false,
     }}>
-    <Stack.Screen name="Barcode" component={HomeScreens} />
+    <Stack.Screen name="HomeScreens" component={HomeScreens} />
   </LoggedInStack.Navigator>
 );
 
@@ -149,7 +152,7 @@ const App: React.FC = () => {
       <NavigationContainer ref={navigationRef}>
         <Stack.Navigator headerMode="none">
           {flag ? (
-            <Stack.Screen name="Barcode" component={LoggedInNavigator} />
+            <Stack.Screen name="HomePage" component={LoggedInNavigator} />
           ) : (
             <Stack.Screen
               name="Login"

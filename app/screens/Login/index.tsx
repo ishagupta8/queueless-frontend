@@ -25,9 +25,7 @@ const Login: React.FC = () => {
   const [isOTP, setIsOTP] = useState(false);
   const [isMobile, setIsMobile] = useState(true);
   const [mobileinput, setMobileInput] = useState('');
-  const dispatch = useDispatch();
-  //const onLogin = () => dispatch(loginActions.requestLogin('test', '1234'));
-  //const onForgot = () => NavigationService.navigate('ForgotPassword');
+  
   const onOTP = async () => {
     try {
       const response = await axios.get(
