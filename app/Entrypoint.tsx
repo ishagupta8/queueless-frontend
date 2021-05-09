@@ -8,16 +8,13 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/es/integration/react';
 
 import Navigator from 'app/navigation';
-import configureStore from 'app/store';
+import store from './redux/store';
 
-const { persistor, store } = configureStore();
 
 const Entrypoint: React.FC = () => {
   return (
     <Provider store={store}>
-      <PersistGate loading={<ActivityIndicator />} persistor={persistor}>
         <Navigator />
-      </PersistGate>
     </Provider>
   );
 };

@@ -21,10 +21,10 @@ const styles = StyleSheet.create({
         paddingLeft: 30,
         elevation: 2,
         backgroundColor:'#0DB165',
-        width:"70%",
+        width:"80%",
         alignSelf:"center",
         marginBottom:"10%",
-        marginTop:"35%",
+        marginTop:"65%",
         },
         buttontext:{
         fontSize: 16,
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         },
         imgcontainer:{
-          marginTop:"15%"
+          marginTop:"20%"
         }
   });
 

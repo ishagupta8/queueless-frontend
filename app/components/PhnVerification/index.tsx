@@ -7,8 +7,6 @@ import {
   View,
 } from 'react-native';
 import { useDispatch } from 'react-redux';
-
-import * as loginActions from 'app/store/actions/loginActions';
 import styles from './styles';
 import NavigationService from 'app/navigation/NavigationService';
 import { Text, Button } from 'react-native';
@@ -37,7 +35,7 @@ const PhnVerification: React.FC<Iphn> = ({ phnNumber }: Iphn) => {
     setModalVisible(!modalVisible);
     if (otpVerification === 'approved') {
       if (user) {
-        NavigationService.navigate('Barcode');
+        NavigationService.navigate('Home');
       } else {
         NavigationService.navigate('SignupForm', { phnNumber: phnNumber });
       }
@@ -45,7 +43,7 @@ const PhnVerification: React.FC<Iphn> = ({ phnNumber }: Iphn) => {
   };
 
   const dispatch = useDispatch();
-  const onLogin = () => dispatch(loginActions.requestLogin('test', '1234'));
+  //const onLogin = () => dispatch(loginActions.requestLogin('test', '1234'));
   const VerifyOTP = async () => {
     let otp = otp1 + otp2 + otp3 + otp4;
     try {

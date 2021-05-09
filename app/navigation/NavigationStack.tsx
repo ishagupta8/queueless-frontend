@@ -8,10 +8,8 @@ import NavigationService from 'app/navigation/NavigationService';
 
 import Login from 'app/screens/Login';
 import Home from 'app/screens/Home';
-import ForgotPassword from 'app/screens/ForgotPassword';
 import MainLogin from 'app/screens/MainLogin';
 import VirtualCart from 'app/screens/VirtualCart';
-import { ILoginState } from 'app/models/reducers/login';
 import SignupForm from '../components/SignupForm';
 import Barcode from '../components/Barcode';
 import Address from '../components/Address';
@@ -23,76 +21,23 @@ import { useEffect, useState } from 'react';
 import { Image, Pressable } from 'react-native';
 import MyOrders from '../screens/MyOrders';
 import Invoice from '../screens/Invoice';
+import storeDetails from '../components/storeDetails';
 
 const Stack = createStackNavigator();
 const AuthStack = createStackNavigator();
 const LoggedInStack = createStackNavigator();
 
-const homeOptions = {
-  title: 'Home',
-  headerTitleStyle: {
-    fontWeight: 'bold',
-  },
-};
-
-interface IState {
-  loginReducer: ILoginState;
-}
-
 const AuthNavigator = () => {
-  const isLoggedIn = useSelector(
-    (state: IState) => state.loginReducer.isLoggedIn,
-  );
   return (
     <AuthStack.Navigator
       screenOptions={{
         headerShown: false,
       }}>
-      <Stack.Screen
-        name="MainLogin"
-        component={MainLogin}
-        options={{
-          // When logging out, a pop animation feels intuitive
-          // You can remove this if you want the default 'push' animation
-          animationTypeForReplace: isLoggedIn ? 'push' : 'pop',
-        }}
-      />
-      <Stack.Screen
-        name="Login"
-        component={Login}
-        options={{
-          // When logging out, a pop animation feels intuitive
-          // You can remove this if you want the default 'push' animation
-          animationTypeForReplace: isLoggedIn ? 'push' : 'pop',
-        }}
-      />
-      <Stack.Screen
-        name="ForgotPassword"
-        component={ForgotPassword}
-        options={{
-          // When logging out, a pop animation feels intuitive
-          // You can remove this if you want the default 'push' animation
-          animationTypeForReplace: isLoggedIn ? 'push' : 'pop',
-        }}
-      />
-      <Stack.Screen
-        name="SignupForm"
-        component={SignupForm}
-        options={{
-          // When logging out, a pop animation feels intuitive
-          // You can remove this if you want the default 'push' animation
-          animationTypeForReplace: isLoggedIn ? 'push' : 'pop',
-        }}
-      />
-      <Stack.Screen
-        name="Barcode"
-        component={HomeScreens}
-        options={{
-          // When logging out, a pop animation feels intuitive
-          // You can remove this if you want the default 'push' animation
-          animationTypeForReplace: isLoggedIn ? 'push' : 'pop',
-        }}
-      />
+      <Stack.Screen name="MainLogin" component={MainLogin} />
+      <Stack.Screen name="Login" component={Login} />
+
+      <Stack.Screen name="SignupForm" component={SignupForm} />
+      <Stack.Screen name="Barcode" component={HomeScreens} />
     </AuthStack.Navigator>
   );
 };
@@ -110,6 +55,14 @@ const HomeScreens = () => (
       },
       headerTintColor: '#2CC980',
     }}>
+    <Stack.Screen
+      name="Home"
+      component={Home}
+      options={{
+        headerTitle: 'NoQ',
+      }}
+    />
+
     <Stack.Screen
       name="Barcode"
       component={Barcode}
@@ -140,9 +93,15 @@ const HomeScreens = () => (
     />
     <Stack.Screen name="Address" component={Address} />
     <Stack.Screen name="AddressForm" component={AddressForm} />
-    <Stack.Screen name="CartEmpty" component={CartEmpty} />
     <Stack.Screen name="MyOrders" component={MyOrders} />
     <Stack.Screen name="Invoice" component={Invoice} />
+    <Stack.Screen
+      name="storeDetails"
+      component={storeDetails}
+      options={{
+        headerTitle: 'Shopping',
+      }}
+    />
   </LoggedInStack.Navigator>
 );
 
@@ -151,15 +110,11 @@ const LoggedInNavigator = () => (
     screenOptions={{
       headerShown: false,
     }}>
-    <Stack.Screen name="Barcode" component={HomeScreens} />
+    <Stack.Screen name="HomeScreens" component={HomeScreens} />
   </LoggedInStack.Navigator>
 );
 
-const App: React.FC<IProps> = (props: IProps) => {
-  const { theme } = props;
-  const isLoggedIn = useSelector(
-    (state: IState) => state.loginReducer.isLoggedIn,
-  );
+const App: React.FC = () => {
   const [flag, setflag] = useState(false);
 
   useEffect(() => {
@@ -167,6 +122,7 @@ const App: React.FC<IProps> = (props: IProps) => {
       const userSession = await axios.get(
         `http://nodejsnoq-env.eba-kfqp329m.us-east-1.elasticbeanstalk.com/api/v1/`,
       );
+
       console.log(userSession);
       if (userSession.data.data !== 'nothing') setflag(true);
 
@@ -184,17 +140,9 @@ const App: React.FC<IProps> = (props: IProps) => {
       <NavigationContainer ref={navigationRef}>
         <Stack.Navigator headerMode="none">
           {flag ? (
-            <Stack.Screen name="Barcode" component={LoggedInNavigator} />
+            <Stack.Screen name="HomePage" component={LoggedInNavigator} />
           ) : (
-            <Stack.Screen
-              name="Login"
-              component={AuthNavigator}
-              options={{
-                // When logging out, a pop animation feels intuitive
-                // You can remove this if you want the default 'push' animation
-                animationTypeForReplace: isLoggedIn ? 'push' : 'pop',
-              }}
-            />
+            <Stack.Screen name="Login" component={AuthNavigator} />
           )}
         </Stack.Navigator>
       </NavigationContainer>

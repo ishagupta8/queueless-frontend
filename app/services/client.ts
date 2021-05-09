@@ -9,7 +9,6 @@ const apiClient = axios.create({
 const apiClient1 = axios.create({
   baseURL: '/',
   responseType: 'json',
-  withCredentials: true,
 });
 
 export { apiClient,apiClient1 };
