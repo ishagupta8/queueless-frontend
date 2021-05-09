@@ -40,7 +40,7 @@ const SignupForm = ({route}:any) => {
     if(response.data!=null)
     {
       ToastAndroid.show("Welcome to NoQ", ToastAndroid.LONG);
-      NavigationService.navigate('Barcode');
+      NavigationService.navigate('Home');
     }
     else{
       ToastAndroid.show("Something went wrong", ToastAndroid.LONG);

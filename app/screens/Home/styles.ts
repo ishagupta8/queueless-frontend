@@ -2,59 +2,94 @@ import {StatusBar, StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
       padding:20,
       backgroundColor:"#F5F5F5",
+      marginBottom:20,
     },
-    item: {
-      padding:5,
+    itemStyle: {
+      borderRadius:2,
       borderColor:"#FDFDFD",
-      borderRadius:1,
+      backgroundColor:"#FFFFFF",
+      marginHorizontal:8
     },
     
     textStyle: {
         fontSize:14,
         fontWeight: 'bold',
+        padding:8,
       },
-    //   proceedbutton: {
-    //     alignContent: 'flex-end',
-    //     borderRadius: 5,
-    //     padding: 10,
-    //     paddingRight: 30,
-    //     paddingLeft: 30,
-    //     elevation: 2,
-    //     backgroundColor:'#0DB165',
-    //     width:"45%",
-    //     alignSelf:"center",
-    //     marginBottom:"10%",
-    //     marginTop:"40%",
-    //     },
-    //     Addressbutton:{
-    //       flexDirection:'row',
-    //       width:"92%",
-    //       backgroundColor:"#FFFFFF",
-    //       padding: 20,
-    //       marginHorizontal: 16,
-    //       marginTop:"4%",
-
-          
-    //     },
-    //     addresstext:{
-    //       color:"#0DB165",
-    //       fontSize:16,
-    //       fontWeight:'bold',
-    //       marginLeft:"20%",
-    //       marginTop:"5%",
-        
-    //     }
+      welcomeText:{
+        color:"#0DB165",
+        fontSize:14,
+        fontWeight:"bold",
+        padding:10,
+        marginTop:10,
+      },
     storeAdd:{
         color:"#848685",
         fontSize:10,
+        padding:3,
+    },
+    storeDis:{
+      color:"#5F5F5F",
+      fontSize:10,
     },
     statusStyle:{
-        marginLeft:"30%",
         color:'#0DB165',
         fontSize:10,
+        padding:3,
+        marginLeft:75,
+
+    },
+    storeText:{
+      fontWeight:"bold",
+      marginTop:30,
+      marginBottom:20,
+      fontSize:14,
+    },
+    locImg:{
+      padding:5,
+      marginHorizontal:3
+    },
+    bottomNav:{
+      flexDirection:'row',
+      padding:16,
+      backgroundColor:"#FFFFFF",
+      shadowColor:"#0000001F",
+      borderRadius:1,
+      borderColor:"#0000001F",
+      borderWidth:1,
+      marginHorizontal:4
+
+
+    },
+    HomeButton:{
+      padding:5,
+      marginHorizontal:10,
+      marginRight:110,
+
+    },
+    CartButton:{
+      padding:5,
+      alignItems:"center",
+      marginHorizontal:10,
+      marginRight:100
+    },
+    ListButton:{
+      padding:5,
+      alignItems:"center",
+    },
+    HomeText:{
+      fontSize:8,
+      color:"#0DB165",
+    },
+    CartText:{
+      fontSize:8,
+      color:"#848685",
+    },
+    ListText:{
+      fontSize:8,
+      color:"#848685",
     }
   });
 

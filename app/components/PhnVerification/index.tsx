@@ -35,7 +35,7 @@ const PhnVerification: React.FC<Iphn> = ({ phnNumber }: Iphn) => {
     setModalVisible(!modalVisible);
     if (otpVerification === 'approved') {
       if (user) {
-        NavigationService.navigate('Barcode');
+        NavigationService.navigate('Home');
       } else {
         NavigationService.navigate('SignupForm', { phnNumber: phnNumber });
       }

@@ -74,7 +74,7 @@ const HomeScreens = () => (
     }}>
      
      <Stack.Screen 
-     name="storeDetails" 
+     name="Home" 
      component={Home} 
      options={{
       headerTitle: 'NoQ'
@@ -111,7 +111,10 @@ const HomeScreens = () => (
     />
     <Stack.Screen name="Address" component={Address} />
     <Stack.Screen name="AddressForm" component={AddressForm} />
-    {/* <Stack.Screen name="storeDetails" component={storeDetails} /> */}
+    <Stack.Screen name="storeDetails" component={storeDetails}  
+    options={{
+      headerTitle:'Shopping'
+     }}/> 
     
     
   </LoggedInStack.Navigator>
