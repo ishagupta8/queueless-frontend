@@ -1,5 +1,6 @@
 import React from 'react';
 import { Image, Pressable, Text, View } from 'react-native';
+import NavigationService from '../../navigation/NavigationService';
 import styles from './styles';
 
 export default function Order() {
@@ -22,7 +23,9 @@ export default function Order() {
         </View>
       </View>
       <View style={styles.invoiceRow}>
-        <Pressable style={styles.invoiceButton}>
+        <Pressable
+          style={styles.invoiceButton}
+          onPress={() => NavigationService.navigate('Invoice')}>
           <Text style={styles.buttonText}>INVOICE</Text>
         </Pressable>
       </View>
