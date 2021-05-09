@@ -21,6 +21,7 @@ import getSession from '../services/getSession';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Image, Pressable } from 'react-native';
+import MyOrders from '../screens/MyOrders';
 
 const Stack = createStackNavigator();
 const AuthStack = createStackNavigator();
@@ -139,6 +140,7 @@ const HomeScreens = () => (
     <Stack.Screen name="Address" component={Address} />
     <Stack.Screen name="AddressForm" component={AddressForm} />
     <Stack.Screen name="CartEmpty" component={CartEmpty} />
+    <Stack.Screen name="MyOrders" component={MyOrders} />
   </LoggedInStack.Navigator>
 );
 

@@ -119,8 +119,8 @@ const Address = () => {
       console.log(error.message);
     }
   };
-  const openCart = () => {
-    NavigationService.navigate('CartEmpty');
+  const openOrders = () => {
+    NavigationService.navigate('MyOrders');
   };
 
   //Function for implementing radio button
@@ -222,7 +222,7 @@ const Address = () => {
         </Pressable>
       </ScrollView>
 
-      <Pressable style={styles.proceedbutton} onPress={() => openCart()}>
+      <Pressable style={styles.proceedbutton} onPress={() => openOrders()}>
         <Text style={styles.textStyle}>PROCEED</Text>
       </Pressable>
     </>
