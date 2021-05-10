@@ -18,7 +18,7 @@ import CartEmpty from '../components/CartEmpty';
 import getSession from '../services/getSession';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { Image, Pressable } from 'react-native';
+import { Image, Pressable, Text, View } from 'react-native';
 import MyOrders from '../screens/MyOrders';
 import Invoice from '../screens/Invoice';
 import storeDetails from '../components/storeDetails';
@@ -26,6 +26,54 @@ import storeDetails from '../components/storeDetails';
 const Stack = createStackNavigator();
 const AuthStack = createStackNavigator();
 const LoggedInStack = createStackNavigator();
+
+const CounterIcon: React.FC = () => {
+  const [showCart, setShowCart] = useState(false);
+  const Items = useSelector((state: any) => state.products);
+  console.log('#################3', Items);
+
+  useEffect(() => {
+    console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%');
+    if (Items.length === 0) {
+      setShowCart(false);
+      console.log('length=0');
+    } else {
+      setShowCart(true);
+      console.log('length>0');
+    }
+  }, [Items]);
+  return (
+    <Pressable
+      onPress={() => NavigationService.navigate('VirtualCart')}
+      style={{ padding: 20 }}>
+      <Image source={require('../assets/cartIcon.png')} />
+      {showCart ? (
+        <View
+          style={{
+            position: 'absolute',
+            backgroundColor: '#2CC980',
+            width: 18,
+            height: 18,
+            borderRadius: 11 / 1,
+            right: 10,
+            top: +10,
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+          <Text
+            style={{
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#FFFFFF',
+              fontSize: 8,
+            }}>
+            {Items.length}
+          </Text>
+        </View>
+      ) : null}
+    </Pressable>
+  );
+};
 
 const AuthNavigator = () => {
   return (
@@ -68,13 +116,7 @@ const HomeScreens = () => (
       component={Barcode}
       options={{
         headerTitle: 'Scan',
-        headerRight: () => (
-          <Pressable
-            onPress={() => NavigationService.navigate('VirtualCart')}
-            style={{ padding: 20 }}>
-            <Image source={require('../assets/cartIcon.png')} />
-          </Pressable>
-        ),
+        headerRight: () => <CounterIcon />,
       }}
     />
     <Stack.Screen
