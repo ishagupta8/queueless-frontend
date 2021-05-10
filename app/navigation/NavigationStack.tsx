@@ -22,6 +22,7 @@ import { Image, Pressable, Text, View } from 'react-native';
 import MyOrders from '../screens/MyOrders';
 import Invoice from '../screens/Invoice';
 import storeDetails from '../components/storeDetails';
+import Splash from '../screens/Splash';
 
 const Stack = createStackNavigator();
 const AuthStack = createStackNavigator();
@@ -81,6 +82,7 @@ const AuthNavigator = () => {
       screenOptions={{
         headerShown: false,
       }}>
+      <Stack.Screen name="Splash" component={Splash} />
       <Stack.Screen name="MainLogin" component={MainLogin} />
       <Stack.Screen name="Login" component={Login} />
 
