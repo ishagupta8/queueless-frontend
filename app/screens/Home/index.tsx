@@ -1,68 +1,61 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Dimensions, FlatList, Image, Pressable, Text, TouchableWithoutFeedback, View } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
+import { useDispatch, useSelector } from 'react-redux';
 import NavigationService from '../../navigation/NavigationService';
+import { getStoreData } from '../../redux/Actions/storeActions';
 import styles from './styles';
 
 
 
 interface IStore {
+  storeId:string;
     name:string,
     add1:string,
     distance:string,
     status:string,
     storeImg:string,
   }
-  
-  const AddressArray = [
-    {
-      storeId:'001',
-      name:"DMart",
-      add1:"B - 19, Sector-A",
-      distance:"0.96KM",
-      status:"Open",
-      storeImg:'../../assets/dmart.png',
-    },
-    {
-      storeId:'002',
-      name:"Metro",
-      add1:"3rd Stage, HSR",
-      distance:"1.6KM",
-      status:"Open",
-      storeImg:'../../assets/metro.png', 
-    },
-    {
-      storeId:'003',
-      name:"Big Bazaar",
-      add1:"3rd Stage, HSR",
-      distance:"1.6KM",
-      status:"Open",
-      storeImg:'../../assets/metro.png', 
-    },
-    {
-      storeId:'004',
-      name:"Metro",
-      add1:"3rd Stage, HSR",
-      distance:"1.6KM",
-      status:"Open",
-      storeImg:'../../assets/metro.png', 
-    },
-    {
-      storeId:'005',
-      name:"Metro",
-      add1:"3rd Stage, HSR",
-      distance:"1.6KM",
-      status:"Open",
-      storeImg:'../../assets/metro.png', 
-    },
-  ];
           
-      const Item = ({name,add1,distance,status,storeImg}:IStore) => {
-  
+      
+const { width, height } = Dimensions.get('window');
+const ASPECT_RATIO = width / height;
+const LATITUDE = 37.4219983;
+const LONGITUDE = -122.084;
+const LATITUDE_DELTA = 0.0922;
+const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
+
+const Home = () => {
+  const AddressArray = useSelector((state:any)=> state.stores.storeList);
+  const [storeID, setStoreID] = useState('');
+  const dispatch = useDispatch();
+
+
+    let region = {
+        latitude:LATITUDE,
+        longitude: LONGITUDE,
+        latitudeDelta: LATITUDE_DELTA,
+        longitudeDelta: LONGITUDE_DELTA,
+       };
+    
+       let location ={
+         latitude: 0,
+         longitude: 0,
+       }
+    
+    
+      const [inregion,setInRegion] = useState(region);
+      const [currentLoc,setCurrentLoc] = useState(location);
+      const storecoords =[];
+    
+      let mapref:MapView | null;
+
+      const Item = ({name,add1,distance,status,storeImg,storeId}:IStore) => {
+        const storeInfo = {name,add1,distance,status,storeImg,storeId};
       return (
-        <TouchableWithoutFeedback onPress={ () => openCart()}>
+        <TouchableWithoutFeedback onPress={() =>{setStoreID(storeInfo.storeId),openCart(storeInfo)}}>
         <View style={styles.itemStyle}>
-          <Image source={require('../../assets/dmart.png')} />   
+          <Image source={require("../../assets/"+"metro.png")} />   
           <Text style={styles.textStyle}>{name}</Text>
           <Text style={styles.storeAdd}>{add1}</Text>
           <View style={{flexDirection:'row'}}>
@@ -82,45 +75,21 @@ interface IStore {
       distance={item.distance}
       status={item.status}
       storeImg={item.storeImg}
+      storeId={item.storeId}
     />
       
     );
   
-    const openCart = () => {
-      NavigationService.navigate("storeDetails");
+    useEffect(() => {
+      if (storeID!==" ") {
+        dispatch(getStoreData(storeID));
+      } 
+    }, [storeID]);
+    
+    const openCart = (storeInfo:any) => {
+      NavigationService.navigate("storeDetails",{storeInfo:storeInfo});
     }
   
-    const { width, height } = Dimensions.get('window');
-const ASPECT_RATIO = width / height;
-const LATITUDE = 37.4219983;
-const LONGITUDE = -122.084;
-const LATITUDE_DELTA = 0.0922;
-const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
-
-const Home = () => {
-    let region = {
-        latitude:LATITUDE,
-        longitude: LONGITUDE,
-        latitudeDelta: LATITUDE_DELTA,
-        longitudeDelta: LONGITUDE_DELTA,
-       };
-    
-       let location ={
-         latitude: 0,
-         longitude: 0,
-       }
-    
-       let store ={
-        lat: 0,
-        long: 0,
-        title:"",
-      }
-    
-      const [inregion,setInRegion] = useState(region);
-      const [currentLoc,setCurrentLoc] = useState(location);
-      const storecoords =[];
-    
-      let mapref:MapView | null;
     return (
     <View style={{flex:1,backgroundColor:"#F5F5F5"}}>
       <View style={{flexDirection:'row'}}>
@@ -180,3 +149,7 @@ const Home = () => {
 }
 
 export default Home;
+function dispatch(arg0: { type: string; payload: any; }) {
+  throw new Error('Function not implemented.');
+}
+

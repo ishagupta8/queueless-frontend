@@ -22,6 +22,7 @@ import { Image, Pressable } from 'react-native';
 import MyOrders from '../screens/MyOrders';
 import Invoice from '../screens/Invoice';
 import storeDetails from '../components/storeDetails';
+import Payment from '../components/Payment';
 
 const Stack = createStackNavigator();
 const AuthStack = createStackNavigator();
@@ -151,6 +152,7 @@ const HomeScreens = () => (
         ),
       }}
     />
+    
   </LoggedInStack.Navigator>
 );
 

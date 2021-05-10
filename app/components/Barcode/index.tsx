@@ -28,15 +28,6 @@ import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import { addToCart, clearCart } from '../../redux/Actions/cartAction';
 import { RootState } from '../../redux/Reducers';
 
-// interface Item {
-//   name: string,
-//   image: string,
-//   price: string,
-//   max_qty: string,
-// }
-// type ItemType = {
-//   cart:Item[]
-// }
 
 const ScanScreen = ()=> {
   let mode = Camera.Constants.FlashMode.off;
@@ -229,16 +220,11 @@ const ScanScreen = ()=> {
           placeholder="Enter Barcode Number"
           onChangeText={changeHandler} 
           value={textInput}></TextInput>
-           <Pressable
+            <Pressable
               style={styles.confirmbutton}
               onPress={() => onManualBarcode()}>
               <Text style={styles.textStyle}>CONFIRM</Text>
             </Pressable>
-            {/* <Pressable
-              style={styles.confirmbutton}
-              onPress={() => open()}>
-              <Text style={styles.textStyle}>PROCEED</Text>
-            </Pressable> */}
           </View>
           </>
          

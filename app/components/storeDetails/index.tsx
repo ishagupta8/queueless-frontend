@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Image, Pressable, Text, View } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
+import { useSelector } from 'react-redux';
 import NavigationService from '../../navigation/NavigationService';
 import styles from './styles';
 
@@ -8,7 +9,11 @@ const ScanProducts = () => {
     NavigationService.navigate('Barcode');
 }
 
-const storeDetails = () => {
+const storeDetails = ({route}:any) => {
+  const storeData = useSelector((state:any) => state.stores.selectedStore);
+  console.log("storeinfovxfvbfvfvf",storeData);
+
+  const {storeInfo} = route.params;
     return (
     <View style={styles.storeContainer}>
         <View style={styles.storeImg}>
@@ -34,12 +39,12 @@ const storeDetails = () => {
         <View style={styles.detailsContainer}>
                 <View style={{flex:2}}>
                     <View style={{flexDirection:'row'}}>
-                <Text style={styles.storeName}>DMart</Text>
-                <Text style={styles.storeStatus}>Open</Text>
+                <Text style={styles.storeName}>{storeInfo.name}</Text>
+                <Text style={styles.storeStatus}>{storeInfo.status}</Text>
                 </View>
-                <Text style={styles.storeAddress}>B - 19, Sector-A, Sector K,</Text>
-                <Text style={styles.storeAddress}>Aliganj, Lucknow, Uttar Pradesh</Text>
-                <Text style={styles.storeAddress}>226024</Text>
+                <Text style={styles.storeAddress}>{storeInfo.add1}</Text>
+                <Text style={styles.storeAddress}>{storeInfo.add1}</Text>
+                <Text style={styles.storeAddress}>{storeInfo.add1}</Text>
                 </View>
                 <View style={styles.verticleLine} />
             <View style={{flex:1}}>        
