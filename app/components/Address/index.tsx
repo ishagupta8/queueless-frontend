@@ -213,6 +213,7 @@ const Address = () => {
                 pincode={item.pincode}
                 city={item.city}
                 state={item.state}
+                key={item.address_id}
               />
             ))}
         </View>

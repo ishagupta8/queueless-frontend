@@ -18,7 +18,7 @@ interface IStore {
     {
       storeId:'001',
       name:"DMart",
-      add1:"2nd Stage, HSR",
+      add1:"B - 19, Sector-A",
       distance:"0.96KM",
       status:"Open",
       storeImg:'../../assets/dmart.png',
@@ -123,7 +123,10 @@ const Home = () => {
       let mapref:MapView | null;
     return (
     <View style={{flex:1,backgroundColor:"#F5F5F5"}}>
+      <View style={{flexDirection:'row'}}>
+      <Image style={{marginTop:10,marginLeft:10}} source={require('../../assets/profileIcon.png')} />
         <Text style={styles.welcomeText}>WELCOME!!</Text>
+        </View>
             <MapView
       ref = {(map) => (mapref = map)}
       style={{width:'100%',height:'40%',display:'flex',marginTop:20}}
@@ -134,7 +137,10 @@ const Home = () => {
     >
 
    <Marker
-  coordinate={currentLoc}
+  coordinate={{
+    latitude: 26.896099,
+    longitude:80.951530
+  }}
   title="YOU ARE HERE"
   />
   </MapView>

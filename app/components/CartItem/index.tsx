@@ -15,8 +15,10 @@ export default function CartItem({thing,removeItem,getPrice}) {
   return (
     <View style={styles.rowContainer}>
       <View style={styles.imageContainer}>
-        {/* <Image source={require('../../assets/chips.png')} /> */}
+      <Image style={{width:50,height:50}} source={{ uri: image}}
+      resizeMode='contain' /> 
       </View>
+      
       <View style={styles.detailsContainer}>
         <Text style={styles.detailsText}>{name}</Text>
         <Text style={styles.priceText}>{price}</Text>

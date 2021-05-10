@@ -37,10 +37,19 @@ const AuthNavigator = () => {
       <Stack.Screen name="Login" component={Login} />
 
       <Stack.Screen name="SignupForm" component={SignupForm} />
-      <Stack.Screen name="Barcode" component={HomeScreens} />
+      <Stack.Screen name="Home" component={HomeScreens} />
     </AuthStack.Navigator>
   );
 };
+
+function LogoTitle(props) {
+  return (
+    <Image
+    style={{alignSelf:'center'}}
+      source={require('../assets/noQ.png')}
+    />
+  );
+}
 
 const HomeScreens = () => (
   <LoggedInStack.Navigator
@@ -59,7 +68,7 @@ const HomeScreens = () => (
       name="Home"
       component={Home}
       options={{
-        headerTitle: 'NoQ',
+        headerTitle:props => <LogoTitle {...props} />,
       }}
     />
 
@@ -91,15 +100,55 @@ const HomeScreens = () => (
         ),
       }}
     />
-    <Stack.Screen name="Address" component={Address} />
-    <Stack.Screen name="AddressForm" component={AddressForm} />
-    <Stack.Screen name="MyOrders" component={MyOrders} />
-    <Stack.Screen name="Invoice" component={Invoice} />
+    <Stack.Screen name="Address" component={Address} 
+    options={{
+      headerRight: () => (
+        <Pressable
+          style={{ padding: 20 }}>
+          <Image source={require('../assets/profileIcon.png')} />
+        </Pressable>
+      ),
+    }}/>
+    <Stack.Screen name="AddressForm" component={AddressForm}
+    options={{
+      headerRight: () => (
+        <Pressable
+          style={{ padding: 20 }}>
+          <Image source={require('../assets/profileIcon.png')} />
+        </Pressable>
+      ),
+    }}
+    />
+    <Stack.Screen name="MyOrders" component={MyOrders} 
+    options={{
+      headerRight: () => (
+        <Pressable
+          style={{ padding: 20 }}>
+          <Image source={require('../assets/profileIcon.png')} />
+        </Pressable>
+      ),
+    }}
+    />
+    <Stack.Screen name="Invoice" component={Invoice}
+    options={{
+      headerRight: () => (
+        <Pressable
+          style={{ padding: 20 }}>
+          <Image source={require('../assets/profileIcon.png')} />
+        </Pressable>
+      ),
+    }} />
     <Stack.Screen
       name="storeDetails"
       component={storeDetails}
       options={{
         headerTitle: 'Shopping',
+        headerRight: () => (
+          <Pressable
+            style={{ padding: 20 }}>
+            <Image source={require('../assets/profileIcon.png')} />
+          </Pressable>
+        ),
       }}
     />
   </LoggedInStack.Navigator>
@@ -110,7 +159,7 @@ const LoggedInNavigator = () => (
     screenOptions={{
       headerShown: false,
     }}>
-    <Stack.Screen name="HomeScreens" component={HomeScreens} />
+    <Stack.Screen name="Home" component={HomeScreens} />
   </LoggedInStack.Navigator>
 );
 
@@ -140,7 +189,7 @@ const App: React.FC = () => {
       <NavigationContainer ref={navigationRef}>
         <Stack.Navigator headerMode="none">
           {flag ? (
-            <Stack.Screen name="HomePage" component={LoggedInNavigator} />
+            <Stack.Screen name="Home" component={LoggedInNavigator} />
           ) : (
             <Stack.Screen name="Login" component={AuthNavigator} />
           )}

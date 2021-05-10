@@ -37,9 +37,9 @@ const storeDetails = () => {
                 <Text style={styles.storeName}>DMart</Text>
                 <Text style={styles.storeStatus}>Open</Text>
                 </View>
-                <Text style={styles.storeAddress}>21, Plot No, Survey, 112, 27th Sector,</Text>
-                <Text style={styles.storeAddress}>HSR Layout, Bengaluru, Karnataka</Text>
-                <Text style={styles.storeAddress}>560100</Text>
+                <Text style={styles.storeAddress}>B - 19, Sector-A, Sector K,</Text>
+                <Text style={styles.storeAddress}>Aliganj, Lucknow, Uttar Pradesh</Text>
+                <Text style={styles.storeAddress}>226024</Text>
                 </View>
                 <View style={styles.verticleLine} />
             <View style={{flex:1}}>        
