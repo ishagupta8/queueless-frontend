@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { clearCart, removeFromCart } from '../../redux/Actions/cartAction';
 import NavigationService from '../../navigation/NavigationService';
 import CartModal from '../CartModal';
+import Payment  from '../Payment';
 
 var radio_props = [
   { label: 'Pickup', value: 0 },
@@ -25,6 +26,7 @@ export default function CartView() {
   const [modalVisible, setModalVisible] = useState(false);
   const [itemFlag,setItemFlag] = useState(false); 
   const [totalPrice, setTotalPrice] = useState(0);
+  const [delivery, setDelivery] = useState(1);
   const dispatch = useDispatch();
 
   
@@ -64,7 +66,13 @@ export default function CartView() {
 
 
   const address = () => {
-    NavigationService.navigate('Address');
+    if(delivery)
+    {
+      NavigationService.navigate('Address',{totalPrice:totalPrice});
+    }
+    else{
+      NavigationService.navigate('Payment',{totalPrice:totalPrice});
+    }
   } 
 
 
@@ -98,7 +106,7 @@ export default function CartView() {
   //   console.log("%%%%%%%%%%%%%%%%%%%%%% use effect of caert view",Items);
   // }, [Items])
   
-  const [delivery, setDelivery] = useState(1);
+  
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>

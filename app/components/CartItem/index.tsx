@@ -20,13 +20,12 @@ export default function CartItem({ thing, removeItem, getPrice }) {
     <View style={styles.rowContainer}>
       <View style={styles.imageContainer}>
         <Image
-          source={{
-            uri: image,
-          }}
           style={{ width: 50, height: 50 }}
+          source={{ uri: image }}
           resizeMode="contain"
         />
       </View>
+
       <View style={styles.detailsContainer}>
         <Text style={styles.detailsText}>{name}</Text>
         <Text style={styles.priceText}>{price}</Text>

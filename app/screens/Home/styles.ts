@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
         fontWeight:"bold",
         padding:10,
         marginTop:10,
+        marginLeft:5
       },
     storeAdd:{
         color:"#848685",

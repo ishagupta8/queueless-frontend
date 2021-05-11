@@ -11,7 +11,6 @@ import {
   SafeAreaView,
   ScrollView,
 } from 'react-native';
-import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import NavigationService from '../../navigation/NavigationService';
 import styles from './styles';
 
@@ -40,7 +39,8 @@ interface AddInt {
   state: string;
 }
 
-const Address = () => {
+    const Address = ({route}:any) => {
+  const {totalPrice} = route.params;
   const arr: Array<AddressInt> = [];
   const [addressList, setAddressList] = useState(arr);
   console.log('after useState', addressList);
@@ -122,6 +122,10 @@ const Address = () => {
   const openOrders = () => {
     NavigationService.navigate('MyOrders');
   };
+
+  const ProceedToPayment = () => {
+    NavigationService.navigate("Payment",{totalPrice:totalPrice});
+  }
 
   //Function for implementing radio button
   function RadioButton(item: AddressInt) {
@@ -213,6 +217,7 @@ const Address = () => {
                 pincode={item.pincode}
                 city={item.city}
                 state={item.state}
+                key={item.address_id}
               />
             ))}
         </View>
@@ -222,7 +227,7 @@ const Address = () => {
         </Pressable>
       </ScrollView>
 
-      <Pressable style={styles.proceedbutton} onPress={() => openOrders()}>
+      <Pressable style={styles.proceedbutton} onPress={() => ProceedToPayment()}>
         <Text style={styles.textStyle}>PROCEED</Text>
       </Pressable>
     </>
@@ -230,6 +235,4 @@ const Address = () => {
 };
 
 export default Address;
-function unsubscribe(): any {
-  throw new Error('Function not implemented.');
-}
+

@@ -13,6 +13,7 @@ interface Item {
     max_qty: string,
     sku:string,
     item_qty:number,
+    product_id:string,
   }
 
 //   const initialState:Item[] = {
