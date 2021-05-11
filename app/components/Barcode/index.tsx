@@ -46,7 +46,7 @@ const ScanScreen = ()=> {
   const [max_qty,setMax_Qty] = useState('');
   const [item_qty,setItem_Qty] = useState(1);
   const [textInput, setTextInput] = useState('');
-  
+  const [productId,setProductId] = useState('');
 
 
   const SCREEN_HEIGHT = (Dimensions.get("window").height);
@@ -58,6 +58,7 @@ const ScanScreen = ()=> {
     max_qty:max_qty,
     sku:code,
     item_qty:item_qty,
+    product_id:productId,
   }
 
   const barcode = {
@@ -85,6 +86,7 @@ const ScanScreen = ()=> {
         setPrice(response.data.price);
         setMax_Qty(response.data.max_qty);
         setItem_Qty(item_qty);
+        setProductId(response.data.product_id);
         ToastAndroid.show("Product scanned sucessfully",ToastAndroid.SHORT);
         setModalVisible(true);
       }
@@ -115,6 +117,7 @@ const ScanScreen = ()=> {
         setName(response.data.name);
         setPrice(response.data.price);
         setMax_Qty(response.data.max_qty);
+        setProductId(response.data.product_id);
         setItem_Qty(item_qty); 
         setModalVisible(true);
       }

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { NavigationContainer, Theme } from '@react-navigation/native';
 import { createStackNavigator, HeaderTitle } from '@react-navigation/stack';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { navigationRef } from './NavigationService';
 import NavigationService from 'app/navigation/NavigationService';
@@ -23,6 +23,7 @@ import MyOrders from '../screens/MyOrders';
 import Invoice from '../screens/Invoice';
 import storeDetails from '../components/storeDetails';
 import Payment from '../components/Payment';
+import { getUserSession } from '../redux/Actions/storeActions';
 
 const Stack = createStackNavigator();
 const AuthStack = createStackNavigator();
@@ -152,6 +153,20 @@ const HomeScreens = () => (
         ),
       }}
     />
+
+<Stack.Screen
+      name="Payment"
+      component={Payment}
+      options={{
+        headerTitle: 'Payments',
+        headerRight: () => (
+          <Pressable
+            style={{ padding: 20 }}>
+            <Image source={require('../assets/profileIcon.png')} />
+          </Pressable>
+        ),
+      }}
+    />
     
   </LoggedInStack.Navigator>
 );
@@ -167,15 +182,24 @@ const LoggedInNavigator = () => (
 
 const App: React.FC = () => {
   const [flag, setflag] = useState(false);
-
+  const dispatch = useDispatch();
   useEffect(() => {
     const session = async () => {
       const userSession = await axios.get(
         `http://nodejsnoq-env.eba-kfqp329m.us-east-1.elasticbeanstalk.com/api/v1/`,
       );
 
+     
+        
       console.log(userSession);
-      if (userSession.data.data !== 'nothing') setflag(true);
+    
+      if (userSession.data.data !== 'nothing') 
+      {
+        setflag(true);
+        dispatch(getUserSession({
+          phone:userSession.data.data,
+          user:userSession.data.user_id}));
+        }
 
       console.log('session', userSession.data.data);
       console.log('session', userSession.data.user_id);

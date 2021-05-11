@@ -11,9 +11,7 @@ import {
   SafeAreaView,
   ScrollView,
 } from 'react-native';
-import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import NavigationService from '../../navigation/NavigationService';
-import { Payment } from '../Payment';
 import styles from './styles';
 
 interface Iadd {

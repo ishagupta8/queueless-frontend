@@ -71,7 +71,7 @@ export default function CartView() {
       NavigationService.navigate('Address',{totalPrice:totalPrice});
     }
     else{
-      Payment(totalPrice);
+      NavigationService.navigate('Payment',{totalPrice:totalPrice});
     }
   } 
 

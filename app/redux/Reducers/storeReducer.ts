@@ -1,5 +1,6 @@
 import {
-    GET_STORE_INFO
+    GET_STORE_INFO,
+    GET_USER_SESSION
 } from '../constants';
 
   const initialState = {
@@ -46,6 +47,7 @@ import {
         },
       ],
     selectedStore:[],
+    session:null,
     };
   
 
@@ -58,6 +60,13 @@ const storeReducer = (state = initialState,action) => {
           return {
             ...state,
             selectedStore: arr,
+          };
+        }
+
+        case GET_USER_SESSION:{
+          return{
+            ...state,
+            session:action.payload,
           };
         }
 

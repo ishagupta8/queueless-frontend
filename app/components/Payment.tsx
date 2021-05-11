@@ -1,10 +1,17 @@
 import axios from 'axios';
-import { useState } from 'react';
-import { Alert } from 'react-native';
+import { useEffect, useState } from 'react';
+import { Alert, Button, Image, Text, ToastAndroid, View } from 'react-native';
 import RazorpayCheckout from 'react-native-razorpay';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearCart } from '../redux/Actions/cartAction';
+import React from 'react';
+import { clearCart} from '../redux/Actions/cartAction';
+import NavigationService from '../navigation/NavigationService';
 
+
+interface productData {
+  quantity:number,
+  product:string,
+}
 
 
   const Payment = ({route}:any) =>{
@@ -12,7 +19,34 @@ import { clearCart } from '../redux/Actions/cartAction';
     const {totalPrice} = route.params;
     const dispatch = useDispatch();
     const Items = useSelector((state:any) => state.products);
+    const storeData = useSelector((state:any) => state.stores.selectedStore);
+    const session = useSelector((state:any)=>state.stores.session);
+    console.log("userid",session);
     const [paymentId, setPaymentId] = useState('');
+
+    
+    let PurchasedProducts:productData[] = [];
+    for (let i = 0; i < Items.length; i++) {
+      
+      const productData ={
+        quantity:Items[i].item_qty,
+        product:Items[i].product_id
+      }
+    PurchasedProducts.push(productData);
+    }
+
+    console.log("purchased",PurchasedProducts);
+
+    const OrderData = {
+        orderItems : PurchasedProducts,
+        phone: session.phone,
+        payment_id: paymentId,
+        store_id: storeData[0].storeId,
+        user: session.user,
+    }
+    
+
+    console.log(OrderData);
 
     const MakePayment = (totalPrice) => {
       console.log(totalPrice)
@@ -36,39 +70,38 @@ import { clearCart } from '../redux/Actions/cartAction';
           console.log("gfgdfdfgfg");
           setPaymentId(data.razorpay_payment_id);
           Alert.alert(`Payment Successful: ${data.razorpay_payment_id}`);
+          orderHistory();
         })
         .catch((error: { code: any; description: any }) => {
           // handle failure
           Alert.alert(`Something went wrong!!!!
           Error: ${error.code} | ${error.description}`);
-          
         });
     };
 
+    // useEffect(() => {
+    //   const orderHistory = async () => {
+    //     console.log("order history")
+    //     axios.post('http://nodejsnoq-env.eba-kfqp329m.us-east-1.elasticbeanstalk.com/api/v1/orders/',OrderData
+    //     ).then(response => {console.log(JSON.stringify(response.data))
+    //     });
+    //   };
+  
+    //   orderHistory();
+    // }, [paymentId]);
+
     const orderHistory = async () => {
-      try {
-        const response = await axios.post(
-          `http://nodejsnoq-env.eba-kfqp329m.us-east-1.elasticbeanstalk.com/api/v1/address/${item.address_id}`,
-        );
-        console.log(JSON.stringify(response.data));
-        if (response.data != null) {
-          ToastAndroid.show('Address deleted', ToastAndroid.LONG);
-          setCount(count => count + 1);
-        } else {
-          ToastAndroid.show('Please try again', ToastAndroid.LONG);
-        }
-      } catch (error) {
-        // handle error
-        console.log(error.message);
-      }
+      console.log("order history")
+      axios.post('http://nodejsnoq-env.eba-kfqp329m.us-east-1.elasticbeanstalk.com/api/v1/orders/',OrderData
+      ).then(response => {console.log(JSON.stringify(response.data))
+      });
     };
 
     return(
-      <>
-        {MakePayment(totalPrice)}
-        {paymentId.length>0 ? orderHistory(): null}
-
-        </>
+      <View>
+      <Button title="pay" onPress={()=>MakePayment(totalPrice)} />
+      <Image source={require('../assets/DmartBig.png')} />
+      </View>
     )
   }
 
