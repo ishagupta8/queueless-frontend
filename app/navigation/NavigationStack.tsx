@@ -87,7 +87,7 @@ const AuthNavigator = () => {
       <Stack.Screen name="Login" component={Login} />
 
       <Stack.Screen name="SignupForm" component={SignupForm} />
-      <Stack.Screen name="Barcode" component={HomeScreens} />
+      <Stack.Screen name="Home" component={HomeScreens} />
     </AuthStack.Navigator>
   );
 };
@@ -154,7 +154,7 @@ const LoggedInNavigator = () => (
     screenOptions={{
       headerShown: false,
     }}>
-    <Stack.Screen name="HomeScreens" component={HomeScreens} />
+    <Stack.Screen name="Home" component={HomeScreens} />
   </LoggedInStack.Navigator>
 );
 
