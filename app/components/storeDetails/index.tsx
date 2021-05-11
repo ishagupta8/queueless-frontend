@@ -1,21 +1,79 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Image, Pressable, Text, View } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import NavigationService from '../../navigation/NavigationService';
+import { clearCart } from '../../redux/Actions/cartAction';
+import { getStoreData } from '../../redux/Actions/storeActions';
+import CartModal from '../CartModal';
 import styles from './styles';
 
-const ScanProducts = () => {
-    NavigationService.navigate('Barcode');
-}
+
 
 const storeDetails = ({route}:any) => {
   const storeData = useSelector((state:any) => state.stores.selectedStore);
-  console.log("storeinfovxfvbfvfvf",storeData);
+  const Items = useSelector((state:any) => state.products);
+  const dispatch = useDispatch();
+  const [modalVisible, setModalVisible] = useState(false);
+  const [itemFlag,setItemFlag] = useState(false); 
 
+  console.log("storeinfovxfvbfvfvf",storeData);
+  console.log("items djfdjfd&&&&&&&&&&&&",Items);
   const {storeInfo} = route.params;
+
+  useEffect(() => {
+    console.log("*****************************");
+    console.log("scan flag",itemFlag);
+    if(itemFlag)
+    {
+      console.log("inside useeffect");
+      dispatch(clearCart());
+    console.log("&&&&&&&&&&&&&&&",Items);
+    setItemFlag(false);
+  }
+  console.log("final store cart",Items);  
+},[itemFlag]);
+
+
+  const confirmClear = () => {
+    setModalVisible(!modalVisible);
+  }
+  const handleClose = () => {
+    setModalVisible(!modalVisible);
+  }
+
+  const ClearCartItems = () => {
+    setItemFlag(true);
+  }
+
+  const ScanProducts = () => {
+    if((storeData.length>0) && (storeData[0].storeId!=storeInfo.storeId))
+    {
+      if(Items.length==0)
+      {
+        NavigationService.navigate('Barcode');
+        dispatch(getStoreData(storeInfo.storeId));
+      }
+      else{
+        confirmClear();
+      }
+  }
+    else {
+      NavigationService.navigate('Barcode');
+      dispatch(getStoreData(storeInfo.storeId));
+    }
+  }
+
     return (
     <View style={styles.storeContainer}>
+      <CartModal
+            modalVisible={modalVisible}
+            handleClose={handleClose}
+            modalInput1={"Items added from"+ storeData[0].name}
+            modalInput2={"Empty the Cart to Proceed"}
+            buttontext={"OKAY"}
+            addItemToCart = {ClearCartItems}
+          />
         <View style={styles.storeImg}>
         <Image source={require('../../assets/DmartLarge.png')} />
         </View>

@@ -16,10 +16,6 @@ interface Item {
     product_id:string,
   }
 
-//   const initialState:Item[] = {
-//       []
-//   }
-
 const cartReducer = (initialState:Item[]=[],action) => {
     switch (action.type) {
         case ADD_TO_CART:{
@@ -27,13 +23,10 @@ const cartReducer = (initialState:Item[]=[],action) => {
             index = initialState.findIndex(item=> item.sku===action.payload.sku); 
             if(index!=-1)
             {
-                // const newArray = initialState; 
-                // console.log("newarray",newArray);
-                // newArray[index].item_qty=newArray[index].item_qty+1;
-                // initialState = newArray;
-                console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$",index);
-                console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",initialState[index]);
-                initialState[index].item_qty=initialState[index].item_qty+1;
+                const newArray = [...initialState]; 
+                console.log("newarray",newArray);
+                newArray[index].item_qty=newArray[index].item_qty+1;
+                initialState = [...newArray];
 
                 return  initialState
                    
@@ -48,10 +41,11 @@ const cartReducer = (initialState:Item[]=[],action) => {
         case INCREMENT_ITEM:
             {
 
-                const index = initialState.findIndex(item=> item.sku===action.payload.sku); 
-                console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ incres",index);
-                initialState[index].item_qty=initialState[index].item_qty+1;
-                console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ incres",initialState[index]);
+                const index = initialState.findIndex(item=> item.sku===action.payload.sku);
+                const newArray = [...initialState]; 
+                console.log("newarray",newArray);
+                newArray[index].item_qty=newArray[index].item_qty+1;
+                initialState = [...newArray];
                        
             return  initialState;
             }
@@ -59,9 +53,10 @@ const cartReducer = (initialState:Item[]=[],action) => {
         case DECREMENT_ITEM:
             {
                 const index = initialState.findIndex(item=> item.sku===action.payload.sku); 
-                console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ decres",index);
-                initialState[index].item_qty=initialState[index].item_qty-1;
-                console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ decres",initialState[index]);
+                const newArray = [...initialState]; 
+                console.log("newarray",newArray);
+                newArray[index].item_qty=newArray[index].item_qty-1;
+                initialState = [...newArray];
                        
             return  initialState;
                 

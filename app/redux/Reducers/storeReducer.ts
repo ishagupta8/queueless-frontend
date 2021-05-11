@@ -59,7 +59,7 @@ const storeReducer = (state = initialState,action) => {
           );
           return {
             ...state,
-            selectedStore: arr,
+            selectedStore: [...arr],
           };
         }
 
