@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { clearCart, removeFromCart } from '../../redux/Actions/cartAction';
 import NavigationService from '../../navigation/NavigationService';
 import CartModal from '../CartModal';
-import Payment  from '../Payment';
+import Payment from '../Payment';
 
 var radio_props = [
   { label: 'Pickup', value: 0 },
@@ -22,104 +22,104 @@ var radio_props = [
 
 export default function CartView() {
   //To get the state of the delivery option selected
-  const Items = useSelector((state:any) => state.products);
+  const Items = useSelector((state: any) => state.products);
   const [modalVisible, setModalVisible] = useState(false);
-  const [itemFlag,setItemFlag] = useState(false); 
+  const [itemFlag, setItemFlag] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
   const [delivery, setDelivery] = useState(1);
   const dispatch = useDispatch();
 
-  
-  useEffect(()=>{
-    let total=0;
-    Items.forEach(cart => total = total + (parseInt(cart.price)*cart.item_qty));
+  useEffect(() => {
+    let total = 0;
+    Items.forEach(
+      cart => (total = total + parseInt(cart.price) * cart.item_qty),
+    );
     setTotalPrice(total);
-    console.log("total price &&&&&&&&&&&&&&&&&&&&&&&&&&&",totalPrice);
-  },[Items]);
-    
+    console.log('total price &&&&&&&&&&&&&&&&&&&&&&&&&&&', totalPrice);
+  }, [Items]);
 
-//   const getCartItems = () => {
-//     if(Items.length===0)
-//     {
-//       setShowEmpty(true);
-//       setShowCart(false);
-//     }
+  //   const getCartItems = () => {
+  //     if(Items.length===0)
+  //     {
+  //       setShowEmpty(true);
+  //       setShowCart(false);
+  //     }
 
-//     else{
-//       setShowEmpty(false);
-//       setShowCart(true);
-//     }
-// }
-  
+  //     else{
+  //       setShowEmpty(false);
+  //       setShowCart(true);
+  //     }
+  // }
+
   const getPrice = () => {
-    let total=0;
-    Items.forEach(cart => total = total + (parseInt(cart.price)*cart.item_qty));
+    let total = 0;
+    Items.forEach(
+      cart => (total = total + parseInt(cart.price) * cart.item_qty),
+    );
     setTotalPrice(total);
-    console.log("total price &&&&&&&&&&&&&&&&&&&&&&&&&&&",totalPrice);
+    console.log('total price &&&&&&&&&&&&&&&&&&&&&&&&&&&', totalPrice);
+  };
 
-  }
-
-  const removeItem = (thing) => {
-    dispatch(removeFromCart(thing))
-  }
-
-
+  const removeItem = thing => {
+    dispatch(removeFromCart(thing));
+  };
 
   const address = () => {
-    if(delivery)
-    {
-      NavigationService.navigate('Address',{totalPrice:totalPrice});
+    if (delivery) {
+      NavigationService.navigate('Address', { totalPrice: totalPrice });
+    } else {
+      NavigationService.navigate('Payment', { totalPrice: totalPrice });
     }
-    else{
-      NavigationService.navigate('Payment',{totalPrice:totalPrice});
-    }
-  } 
-
-
+  };
 
   useEffect(() => {
-    console.log("*****************************");
-    console.log("scan flag",itemFlag);
-    if(itemFlag)
-    {
-      console.log("inside useeffect");
+    console.log('*****************************');
+    console.log('scan flag', itemFlag);
+    if (itemFlag) {
+      console.log('inside useeffect');
       dispatch(clearCart());
-    console.log("&&&&&&&&&&&&&&&",Items);
-    setItemFlag(false);
-  }
-  console.log("final store cart",Items);  
-},[itemFlag]);
+      console.log('&&&&&&&&&&&&&&&', Items);
+      setItemFlag(false);
+    }
+    console.log('final store cart', Items);
+  }, [itemFlag]);
 
   const confirmClear = () => {
     setModalVisible(!modalVisible);
-  }
+  };
   const handleClose = () => {
     setModalVisible(!modalVisible);
-  }
+  };
 
   const ClearCartItems = () => {
     setItemFlag(true);
-  }
+  };
 
   // useEffect(() => {
-    
+
   //   console.log("%%%%%%%%%%%%%%%%%%%%%% use effect of caert view",Items);
   // }, [Items])
-  
-  
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
-      <CartModal
-            modalVisible={modalVisible}
-            handleClose={handleClose}
-            modalInput1={"Do you want"}
-            modalInput2={"Empty the Cart"}
-            buttontext={"OKAY"}
-            addItemToCart = {ClearCartItems}
-          />
+        <CartModal
+          modalVisible={modalVisible}
+          handleClose={handleClose}
+          modalInput1={'Do you want'}
+          modalInput2={'Empty the Cart'}
+          buttontext={'OKAY'}
+          addItemToCart={ClearCartItems}
+        />
         <View>
-          {Items.map((item) => <CartItem thing={item}  key={item.sku} removeItem={removeItem} getPrice={getPrice}/>)}
+          {Items.map(item => (
+            <CartItem
+              thing={item}
+              key={item.sku}
+              removeItem={removeItem}
+              getPrice={getPrice}
+            />
+          ))}
         </View>
 
         <View>
@@ -130,8 +130,8 @@ export default function CartView() {
                 <Text style={styles.bottomText}>Taxes</Text>
               </View>
               <View style={styles.secondContainer}>
-                <Text style={styles.topText}>{totalPrice}</Text>
-                <Text style={styles.bottomText}>{0.05*totalPrice}</Text>
+                <Text style={styles.topText}>₹{totalPrice}</Text>
+                <Text style={styles.bottomText}>₹{0.05 * totalPrice}</Text>
               </View>
             </View>
             <View>
@@ -140,7 +140,9 @@ export default function CartView() {
                   <Text style={styles.totalText}>Grand Total</Text>
                 </View>
                 <View style={styles.secondContainer}>
-                  <Text style={styles.totalText}>{totalPrice+0.05*totalPrice}</Text>
+                  <Text style={styles.totalText}>
+                    ₹{totalPrice + 0.05 * totalPrice}
+                  </Text>
                 </View>
               </View>
               <View style={styles.radioButtonView}>
@@ -167,11 +169,13 @@ export default function CartView() {
       <View style={styles.buttonView}>
         <View style={styles.clearButton}>
           <Pressable>
-            <Text style={styles.clearText} onPress={() => confirmClear()}>CLEAR</Text>
+            <Text style={styles.clearText} onPress={() => confirmClear()}>
+              CLEAR
+            </Text>
           </Pressable>
         </View>
         <View style={styles.checkoutButton}>
-          <Pressable style={styles.buttonContainer} onPress={()=>address()}>
+          <Pressable style={styles.buttonContainer} onPress={() => address()}>
             <Text style={styles.buttonText}>CHECKOUT</Text>
           </Pressable>
         </View>

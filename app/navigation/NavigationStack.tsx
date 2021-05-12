@@ -25,6 +25,7 @@ import storeDetails from '../components/storeDetails';
 import Splash from '../screens/Splash';
 import Payment from '../components/Payment';
 import { getUserSession } from '../redux/Actions/storeActions';
+import Profile from '../screens/Profile';
 
 const Stack = createStackNavigator();
 const AuthStack = createStackNavigator();
@@ -121,6 +122,7 @@ const HomeScreens = () => (
       component={Home}
       options={{
         headerTitle: props => <LogoTitle {...props} />,
+        headerLeft: () => null,
       }}
     />
 
@@ -151,7 +153,9 @@ const HomeScreens = () => (
       component={Address}
       options={{
         headerRight: () => (
-          <Pressable style={{ padding: 20 }}>
+          <Pressable
+            style={{ padding: 20 }}
+            onPress={() => NavigationService.navigate('Profile')}>
             <Image source={require('../assets/profileIcon.png')} />
           </Pressable>
         ),
@@ -162,7 +166,9 @@ const HomeScreens = () => (
       component={AddressForm}
       options={{
         headerRight: () => (
-          <Pressable style={{ padding: 20 }}>
+          <Pressable
+            style={{ padding: 20 }}
+            onPress={() => NavigationService.navigate('Profile')}>
             <Image source={require('../assets/profileIcon.png')} />
           </Pressable>
         ),
@@ -173,7 +179,9 @@ const HomeScreens = () => (
       component={MyOrders}
       options={{
         headerRight: () => (
-          <Pressable style={{ padding: 20 }}>
+          <Pressable
+            style={{ padding: 20 }}
+            onPress={() => NavigationService.navigate('Profile')}>
             <Image source={require('../assets/profileIcon.png')} />
           </Pressable>
         ),
@@ -184,7 +192,9 @@ const HomeScreens = () => (
       component={Invoice}
       options={{
         headerRight: () => (
-          <Pressable style={{ padding: 20 }}>
+          <Pressable
+            style={{ padding: 20 }}
+            onPress={() => NavigationService.navigate('Profile')}>
             <Image source={require('../assets/profileIcon.png')} />
           </Pressable>
         ),
@@ -196,7 +206,9 @@ const HomeScreens = () => (
       options={{
         headerTitle: 'Shopping',
         headerRight: () => (
-          <Pressable style={{ padding: 20 }}>
+          <Pressable
+            style={{ padding: 20 }}
+            onPress={() => NavigationService.navigate('Profile')}>
             <Image source={require('../assets/profileIcon.png')} />
           </Pressable>
         ),
@@ -209,10 +221,31 @@ const HomeScreens = () => (
       options={{
         headerTitle: 'Payments',
         headerRight: () => (
+          <Pressable
+            style={{ padding: 20 }}
+            onPress={() => NavigationService.navigate('Profile')}>
+            <Image source={require('../assets/profileIcon.png')} />
+          </Pressable>
+        ),
+      }}
+    />
+    <Stack.Screen
+      name="Profile"
+      component={Profile}
+      options={{
+        headerTitle: 'Profile',
+        headerRight: () => (
           <Pressable style={{ padding: 20 }}>
             <Image source={require('../assets/profileIcon.png')} />
           </Pressable>
         ),
+      }}
+    />
+    <Stack.Screen
+      name="Login"
+      component={AuthNavigator}
+      options={{
+        headerShown: false,
       }}
     />
   </LoggedInStack.Navigator>
