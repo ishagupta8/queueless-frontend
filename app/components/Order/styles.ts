@@ -17,11 +17,11 @@ const styles = StyleSheet.create({
   },
   storeContainer: {
     width: '20%',
-    justifyContent: 'center',
     alignItems: 'center',
   },
   detailsContainer: {
     width: '50%',
+    paddingLeft: 10,
   },
   totalConatiner: {
     width: '30%',
