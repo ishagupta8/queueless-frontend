@@ -63,10 +63,7 @@ const Home = () => {
   }: IStore) => {
     const storeInfo = { name, add1, distance, status, storeImg, storeId };
     return (
-      <TouchableWithoutFeedback
-        onPress={() => {
-          setStoreID(storeInfo.storeId), openCart(storeInfo);
-        }}>
+      <TouchableWithoutFeedback onPress={() => openCart(storeInfo)}>
         <View style={styles.itemStyle}>
           <Image source={require('../../assets/' + 'metro.png')} />
           <Text style={styles.textStyle}>{name}</Text>
@@ -95,11 +92,11 @@ const Home = () => {
     />
   );
 
-  useEffect(() => {
-    if (storeID !== ' ') {
-      dispatch(getStoreData(storeID));
-    }
-  }, [storeID]);
+  // useEffect(() => {
+  //   if (storeID!==" ") {
+  //     dispatch(getStoreData(storeID));
+  //   }
+  // }, [storeID]);
 
   const openCart = (storeInfo: any) => {
     NavigationService.navigate('storeDetails', { storeInfo: storeInfo });
@@ -168,6 +165,3 @@ const Home = () => {
 };
 
 export default Home;
-function dispatch(arg0: { type: string; payload: any }) {
-  throw new Error('Function not implemented.');
-}

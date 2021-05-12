@@ -58,16 +58,7 @@ const storeReducer = (state = initialState, action) => {
       let arr = state.storeList.filter(id => id.storeId == action.payload);
       return {
         ...state,
-        selectedStore: arr,
-      };
-    }
-
-    case GET_STORE_DETAILS: {
-      let arr = state.storeList.filter(id => id.storeId == action.payload);
-      console.log('inside reducer ******', arr);
-      return {
-        ...state,
-        orderStore: arr,
+        selectedStore: [...arr],
       };
     }
 

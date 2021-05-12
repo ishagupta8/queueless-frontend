@@ -5,14 +5,10 @@ import styles from './styles';
 interface IModal {
   modalVisible: boolean;
   handleClose: () => void;
-  modalInput1: string;
-  modalInput2: string;
-  buttontext:string;
-  addItemToCart: () => void;
-
+  modalInput: string;
 }
 
-const CartModal = ({ modalVisible, handleClose, modalInput1,modalInput2,buttontext,addItemToCart }: IModal) => {
+const PaymentModal = ({ modalVisible, handleClose, modalInput }: IModal) => {
   return (
     <View style={styles.centeredView}>
       <Modal
@@ -22,15 +18,11 @@ const CartModal = ({ modalVisible, handleClose, modalInput1,modalInput2,buttonte
         onRequestClose={() => handleClose()}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Pressable onPress={() => handleClose()} style={styles.crossStyle}>
-              <Image source={require('../../assets/cross.png')} />
-            </Pressable>
-            <Text style={styles.modalText}>{modalInput1}</Text>
-            <Text style={styles.modalText}>{modalInput2}</Text>
+            <Text style={styles.modalText}>{modalInput}</Text>
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => addItemToCart()}>
-              <Text style={styles.textStyle}>{buttontext}</Text>
+              onPress={() => handleClose()}>
+              <Text style={styles.textStyle}>Close</Text>
             </Pressable>
           </View>
         </View>
@@ -39,4 +31,4 @@ const CartModal = ({ modalVisible, handleClose, modalInput1,modalInput2,buttonte
   );
 };
 
-export default CartModal;
+export default PaymentModal;
