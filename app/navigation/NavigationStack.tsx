@@ -25,6 +25,8 @@ import storeDetails from '../components/storeDetails';
 import Splash from '../screens/Splash';
 import Payment from '../components/Payment';
 import { getUserSession } from '../redux/Actions/storeActions';
+import ShopList from '../components/ShopList';
+import ShoppingList from '../screens/ShoppingList';
 
 const Stack = createStackNavigator();
 const AuthStack = createStackNavigator();
@@ -208,6 +210,33 @@ const HomeScreens = () => (
       component={Payment}
       options={{
         headerTitle: 'Payments',
+        headerRight: () => (
+          <Pressable style={{ padding: 20 }}>
+            <Image source={require('../assets/profileIcon.png')} />
+          </Pressable>
+        ),
+      }}
+
+      />
+
+      <Stack.Screen
+      name="ShopList"
+      component={ShopList}
+      options={{
+        headerTitle: 'Shopping List',
+        headerRight: () => (
+          <Pressable style={{ padding: 20 }}>
+            <Image source={require('../assets/profileIcon.png')} />
+          </Pressable>
+        ),
+      }}
+    />
+
+<Stack.Screen
+      name="ShoppingList"
+      component={ShoppingList}
+      options={{
+        headerTitle: 'Shopping List',
         headerRight: () => (
           <Pressable style={{ padding: 20 }}>
             <Image source={require('../assets/profileIcon.png')} />

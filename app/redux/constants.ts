@@ -6,3 +6,5 @@ export const DECREMENT_ITEM = 'DECREMENT_ITEM';
 export const GET_STORE_INFO = 'GET_STORE_INFO';
 export const GET_USER_SESSION = 'GET_USER_SESSION';
 export const GET_STORE_DETAILS = 'GET_STORE_DETAILS';
+export const ADD_TO_LIST = 'ADD_TO_LIST';
+export const REMOVE_FROM_LIST = 'REMOVE_FROM_LIST';

@@ -4,7 +4,6 @@ const SCREEN_HEIGHT = (Dimensions.get("window").height);
 
 const styles = StyleSheet.create({
     storeContainer: {
-      padding:20,
       backgroundColor:"#F5F5F5",
       flex:1,
       height:SCREEN_HEIGHT,
@@ -56,7 +55,7 @@ const styles = StyleSheet.create({
       width:"45%",
       alignSelf:"center",
       marginBottom:"20%",
-      marginTop:"8%",
+      marginTop:"2%",
       },
       textStyle: {
           fontSize: 16,

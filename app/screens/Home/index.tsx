@@ -157,7 +157,8 @@ const Home = () => {
           <Image source={require('../../assets/cartIcon.png')} />
           <Text style={styles.CartText}>My Cart</Text>
         </Pressable>
-        <Pressable style={styles.ListButton}>
+        <Pressable style={styles.ListButton}
+        onPress={() => NavigationService.navigate('ShoppingList')}>
           <Image source={require('../../assets/shoppingList.png')} />
           <Text style={styles.ListText}>Shopping List</Text>
         </Pressable>

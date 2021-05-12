@@ -2,7 +2,6 @@ import {StatusBar, StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
     container: {
-      padding:20,
       backgroundColor:"#F5F5F5",
     },
     itemStyle: {
@@ -43,7 +42,8 @@ const styles = StyleSheet.create({
     },
     storeText:{
       fontWeight:"bold",
-      marginBottom:20,
+      marginVertical: 12,
+      paddingLeft: 8,
       fontSize:14,
     },
     locImg:{
@@ -58,9 +58,10 @@ const styles = StyleSheet.create({
       borderRadius:1,
       borderColor:"#FFFFFF",
       borderWidth:1,
-      marginHorizontal:4
-
-
+      marginHorizontal:4,
+      position: 'absolute',
+      bottom:0,
+      left:0,
     },
     HomeButton:{
       padding:5,
