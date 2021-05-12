@@ -1,6 +1,7 @@
 import {
-    GET_STORE_INFO,
-    GET_USER_SESSION
+  GET_STORE_INFO,
+  GET_USER_SESSION,
+  GET_STORE_DETAILS,
 } from '../constants';
 
   const initialState = {
@@ -30,7 +31,7 @@ import {
           add1:"B-12, Sector-A",
           distance:"0.86KM",
           status:"Open",
-          storeImgBig:'https://hbs-noq.s3.ap-south-1.amazonaws.com/bigbazzarXHD.png',
+          storeImgBig:'https://hbs-noq.s3.ap-south-1.amazonaws.com/bigbazzarHD.png',
           storeImgSmall:'https://hbs-noq.s3.ap-south-1.amazonaws.com/bigbazzarMD.png'
         },
         {
@@ -39,7 +40,7 @@ import {
           add1:"A-10, Sector-D",
           distance:"1.2KM",
           status:"Open",
-          storeImgBig:'https://hbs-noq.s3.ap-south-1.amazonaws.com/farmshopXHD.png',
+          storeImgBig:'https://hbs-noq.s3.ap-south-1.amazonaws.com/farmshopHD.png',
           storeImgSmall:'https://hbs-noq.s3.ap-south-1.amazonaws.com/farmshopMD.png'
         },
       ],
@@ -48,28 +49,26 @@ import {
     };
   
 
-const storeReducer = (state = initialState,action) => {
-    switch (action.type) {
-        case GET_STORE_INFO:{
-          let arr = state.storeList.filter(
-            (id) => id.storeId == action.payload
-          );
-          return {
-            ...state,
-            selectedStore: [...arr],
-          };
-        }
+const storeReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case GET_STORE_INFO: {
+      let arr = state.storeList.filter(id => id.storeId == action.payload);
+      return {
+        ...state,
+        selectedStore: [...arr],
+      };
+    }
 
-        case GET_USER_SESSION:{
-          return{
-            ...state,
-            session:action.payload,
-          };
-        }
+    case GET_USER_SESSION: {
+      return {
+        ...state,
+        session: action.payload,
+      };
+    }
 
-        default:
-            return state;
-}
+    default:
+      return state;
+  }
 };
 
 export default storeReducer;

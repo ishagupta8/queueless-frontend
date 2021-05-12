@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { Image, Pressable, Text, View } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,61 +8,53 @@ import { getStoreData } from '../../redux/Actions/storeActions';
 import CartModal from '../CartModal';
 import styles from './styles';
 
-
-
-const storeDetails = ({route}:any) => {
-  const storeData = useSelector((state:any) => state.stores.selectedStore);
-  const Items = useSelector((state:any) => state.products);
+const storeDetails = ({ route }: any) => {
+  const storeData = useSelector((state: any) => state.stores.selectedStore);
+  const Items = useSelector((state: any) => state.products);
   const dispatch = useDispatch();
   const [modalVisible, setModalVisible] = useState(false);
-  const [itemFlag,setItemFlag] = useState(false); 
+  const [itemFlag, setItemFlag] = useState(false);
 
-  console.log("storeinfovxfvbfvfvf",storeData);
-  console.log("items djfdjfd&&&&&&&&&&&&",Items);
-  const {storeInfo} = route.params;
+  console.log('storeinfovxfvbfvfvf', storeData);
+  console.log('items djfdjfd&&&&&&&&&&&&', Items);
+  const { storeInfo,currentLoc } = route.params;
 
   useEffect(() => {
-    console.log("*****************************");
-    console.log("scan flag",itemFlag);
-    if(itemFlag)
-    {
-      console.log("inside useeffect");
+    console.log('*****************************');
+    console.log('scan flag', itemFlag);
+    if (itemFlag) {
+      console.log('inside useeffect');
       dispatch(clearCart());
-    console.log("&&&&&&&&&&&&&&&",Items);
-    setItemFlag(false);
-  }
-  console.log("final store cart",Items);  
-},[itemFlag]);
-
+      console.log('&&&&&&&&&&&&&&&', Items);
+      setItemFlag(false);
+    }
+    console.log('final store cart', Items);
+  }, [itemFlag]);
 
   const confirmClear = () => {
     setModalVisible(!modalVisible);
-  }
+  };
   const handleClose = () => {
     setModalVisible(!modalVisible);
-  }
+  };
 
   const ClearCartItems = () => {
     setItemFlag(true);
-  }
+  };
 
   const ScanProducts = () => {
-    if((storeData.length>0) && (storeData[0].storeId!=storeInfo.storeId))
-    {
-      if(Items.length==0)
-      {
+    if (storeData.length > 0 && storeData[0].storeId != storeInfo.storeId) {
+      if (Items.length == 0) {
         NavigationService.navigate('Barcode');
         dispatch(getStoreData(storeInfo.storeId));
-      }
-      else{
+      } else {
         confirmClear();
       }
-  }
-    else {
+    } else {
       NavigationService.navigate('Barcode');
       dispatch(getStoreData(storeInfo.storeId));
     }
-  }
+  };
 
     return (
       <>
@@ -76,23 +68,20 @@ const storeDetails = ({route}:any) => {
             addItemToCart = {ClearCartItems}
           />
         <View>
-        <Image style={{height:80,width:"100%"}} resizeMode="contain" source={{uri:storeInfo.storeImgBig}} />
+        <Image style={{height:260,width:"90%",alignSelf:'center'}} source={{uri:storeInfo.storeImgBig}} />
         </View>
         <MapView
-      style={{width:'90%',height:'30%',display:'flex',marginHorizontal:18}}
-      region={{latitude: 26.9004,
-        longitude: 80.9484,
+      style={{width:'90%',height:'25%',display:'flex',marginTop:10,marginHorizontal:18}}
+      region={{latitude: currentLoc.latitude,
+        longitude: currentLoc.longitude,
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421,
       }}
     >
 
    <Marker
-  coordinate={{
-    latitude: 26.8465,
-    longitude:  80.9467
- }}
-  title="DMart"
+  coordinate={currentLoc}
+  title={storeInfo.name}
   />
   </MapView>
         <View style={styles.detailsContainer}>
@@ -117,12 +106,9 @@ const storeDetails = ({route}:any) => {
             </Pressable>
             </View>
         </View>
-        <Pressable
-              style={styles.storebutton}
-              onPress={()=>ScanProducts()}
-              >
-              <Text style={styles.textStyle}>BUY PRODUCTS</Text>
-            </Pressable>
+      <Pressable style={styles.storebutton} onPress={() => ScanProducts()}>
+        <Text style={styles.textStyle}>BUY PRODUCTS</Text>
+      </Pressable>
     </View>
     </>
     )

@@ -1,10 +1,13 @@
-import {StatusBar, StyleSheet} from 'react-native';
+import {Dimensions, StatusBar, StyleSheet} from 'react-native';
+
+const SCREEN_HEIGHT = (Dimensions.get("window").height);
 
 const styles = StyleSheet.create({
     storeContainer: {
       padding:20,
       backgroundColor:"#F5F5F5",
-      flex:1
+      flex:1,
+      height:SCREEN_HEIGHT,
     },
     storeImg:{
       alignSelf:"center",
@@ -27,7 +30,7 @@ const styles = StyleSheet.create({
       flexDirection:'row',
       backgroundColor:"#FFFFFF",
       marginHorizontal:20,
-      marginTop:20,
+      marginTop:10,
     },
     scanText:{
       fontSize:10,
@@ -52,8 +55,8 @@ const styles = StyleSheet.create({
       backgroundColor:'#0DB165',
       width:"45%",
       alignSelf:"center",
-      marginBottom:"10%",
-      marginTop:"15%",
+      marginBottom:"20%",
+      marginTop:"8%",
       },
       textStyle: {
           fontSize: 16,
