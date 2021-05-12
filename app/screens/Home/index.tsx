@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Dimensions, FlatList, Image, Pressable, Text, TouchableWithoutFeedback, View } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import NavigationService from '../../navigation/NavigationService';
-import { getStoreData } from '../../redux/Actions/storeActions';
+import Geolocation from 'react-native-geolocation-service';
 import styles from './styles';
 
 
@@ -14,7 +14,8 @@ interface IStore {
     add1:string,
     distance:string,
     status:string,
-    storeImg:string,
+    storeImgBig:string,
+    storeImgSmall:string,
   }
           
       
@@ -27,10 +28,6 @@ const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 const Home = () => {
   const AddressArray = useSelector((state:any)=> state.stores.storeList);
-  const [storeID, setStoreID] = useState('');
-  const dispatch = useDispatch();
-
-
     let region = {
         latitude:LATITUDE,
         longitude: LONGITUDE,
@@ -47,15 +44,30 @@ const Home = () => {
       const [inregion,setInRegion] = useState(region);
       const [currentLoc,setCurrentLoc] = useState(location);
       const storecoords =[];
+
+      useEffect (() => {
+    Geolocation.getCurrentPosition(
+      (position) => {
+        console.log(position);
+        const {latitude,longitude} = position.coords;
+        setCurrentLoc({latitude,longitude});
+      },
+      (error) => {
+        // See error code charts below.
+        console.log(error.code, error.message);
+      },
+      { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
+  );
+  },[])
     
       let mapref:MapView | null;
 
-      const Item = ({name,add1,distance,status,storeImg,storeId}:IStore) => {
-        const storeInfo = {name,add1,distance,status,storeImg,storeId};
+      const Item = ({name,add1,distance,status,storeImgBig,storeImgSmall,storeId}:IStore) => {
+        const storeInfo = {name,add1,distance,status,storeImgBig,storeId};
       return (
         <TouchableWithoutFeedback onPress={() =>openCart(storeInfo)}>
         <View style={styles.itemStyle}>
-          <Image source={require("../../assets/"+"metro.png")} />   
+          <Image style={{height:130,width:"100%",alignSelf:'center'}} source={{uri:storeImgSmall}}/>   
           <Text style={styles.textStyle}>{name}</Text>
           <Text style={styles.storeAdd}>{add1}</Text>
           <View style={{flexDirection:'row'}}>
@@ -74,8 +86,10 @@ const Home = () => {
       add1={item.add1}
       distance={item.distance}
       status={item.status}
-      storeImg={item.storeImg}
+      storeImgBig={item.storeImgBig}
+      storeImgSmall={item.storeImgSmall}
       storeId={item.storeId}
+
     />
       
     );
@@ -106,10 +120,7 @@ const Home = () => {
     >
 
    <Marker
-  coordinate={{
-    latitude: 26.896099,
-    longitude:80.951530
-  }}
+   coordinate={currentLoc}
   title="YOU ARE HERE"
   />
   </MapView>
@@ -149,7 +160,5 @@ const Home = () => {
 }
 
 export default Home;
-function dispatch(arg0: { type: string; payload: any; }) {
-  throw new Error('Function not implemented.');
-}
+
 

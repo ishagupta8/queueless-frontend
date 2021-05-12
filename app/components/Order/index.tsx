@@ -8,7 +8,9 @@ export default function Order() {
     <View style={styles.orderContainer}>
       <View style={styles.orderRow}>
         <View style={styles.storeContainer}>
-          <Image source={require('../../assets/store1.png')} />
+          <Image
+          style={{ width: '100%', height: 60 }}
+          source={require('../../assets/store1.png')} />
         </View>
         <View style={styles.detailsContainer}>
           <Text style={styles.storeName}>DMart</Text>

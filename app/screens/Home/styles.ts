@@ -4,7 +4,6 @@ const styles = StyleSheet.create({
     container: {
       padding:20,
       backgroundColor:"#F5F5F5",
-      marginBottom:20,
     },
     itemStyle: {
       borderRadius:2,
@@ -44,7 +43,6 @@ const styles = StyleSheet.create({
     },
     storeText:{
       fontWeight:"bold",
-      marginTop:30,
       marginBottom:20,
       fontSize:14,
     },
@@ -54,11 +52,11 @@ const styles = StyleSheet.create({
     },
     bottomNav:{
       flexDirection:'row',
-      padding:16,
+      padding:10,
       backgroundColor:"#FFFFFF",
       shadowColor:"#0000001F",
       borderRadius:1,
-      borderColor:"#0000001F",
+      borderColor:"#FFFFFF",
       borderWidth:1,
       marginHorizontal:4
 

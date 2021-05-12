@@ -65,20 +65,21 @@ const storeDetails = ({route}:any) => {
   }
 
     return (
+      <>
     <View style={styles.storeContainer}>
       <CartModal
             modalVisible={modalVisible}
             handleClose={handleClose}
-            modalInput1={"Items added from"+ storeData[0].name}
+            modalInput1={"You have pending orders"}
             modalInput2={"Empty the Cart to Proceed"}
             buttontext={"OKAY"}
             addItemToCart = {ClearCartItems}
           />
-        <View style={styles.storeImg}>
-        <Image source={require('../../assets/DmartLarge.png')} />
+        <View>
+        <Image style={{height:80,width:"100%"}} resizeMode="contain" source={{uri:storeInfo.storeImgBig}} />
         </View>
         <MapView
-      style={{width:'90%',height:'30%',display:'flex',marginTop:20,marginHorizontal:18}}
+      style={{width:'90%',height:'30%',display:'flex',marginHorizontal:18}}
       region={{latitude: 26.9004,
         longitude: 80.9484,
         latitudeDelta: 0.0922,
@@ -101,8 +102,10 @@ const storeDetails = ({route}:any) => {
                 <Text style={styles.storeStatus}>{storeInfo.status}</Text>
                 </View>
                 <Text style={styles.storeAddress}>{storeInfo.add1}</Text>
-                <Text style={styles.storeAddress}>{storeInfo.add1}</Text>
-                <Text style={styles.storeAddress}>{storeInfo.add1}</Text>
+                <View style={{marginTop:10}}>
+                <Text style={styles.storeText}>One place store to</Text>
+                <Text style={styles.storeText}>suffice all your needs.</Text>
+                </View>
                 </View>
                 <View style={styles.verticleLine} />
             <View style={{flex:1}}>        
@@ -121,6 +124,7 @@ const storeDetails = ({route}:any) => {
               <Text style={styles.textStyle}>BUY PRODUCTS</Text>
             </Pressable>
     </View>
+    </>
     )
 }
 

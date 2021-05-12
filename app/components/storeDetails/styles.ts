@@ -64,6 +64,10 @@ const styles = StyleSheet.create({
         mapImg:{
           padding:30,
           alignSelf:'center',
+        },
+        storeText:{
+          fontSize:14,
+          color:"#848685",
         }
 
   });
