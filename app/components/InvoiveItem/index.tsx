@@ -9,21 +9,22 @@ interface IItem {
   amount: string;
 }
 
-const InvoiceItem = ({ itemName, price, qty, amount }: IItem) => {
-  console.log('Inside invoice Items');
+const InvoiceItem = ({ item }) => {
   return (
     <View style={styles.headings}>
       <View style={styles.itemsHeading}>
-        <Text style={styles.itemsText}>{itemName}</Text>
+        <Text style={styles.itemsText}>{item.product.name}</Text>
       </View>
       <View style={styles.priceHeading}>
-        <Text style={styles.priceQtyText}>{price}</Text>
+        <Text style={styles.priceQtyText}>{item.product.price}</Text>
       </View>
       <View style={styles.quantityHeading}>
-        <Text style={styles.priceQtyText}>{qty}</Text>
+        <Text style={styles.priceQtyText}>{item.quantity}</Text>
       </View>
       <View style={styles.amountHeading}>
-        <Text style={styles.amountText}>{amount}</Text>
+        <Text style={styles.amountText}>
+          {item.product.price * item.quantity}
+        </Text>
       </View>
     </View>
   );
