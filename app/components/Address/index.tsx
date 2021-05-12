@@ -39,8 +39,8 @@ interface AddInt {
   state: string;
 }
 
-    const Address = ({route}:any) => {
-  const {totalPrice} = route.params;
+const Address = ({ route }: any) => {
+  const { totalPrice } = route.params;
   const arr: Array<AddressInt> = [];
   const [addressList, setAddressList] = useState(arr);
   console.log('after useState', addressList);
@@ -124,8 +124,12 @@ interface AddInt {
   };
 
   const ProceedToPayment = () => {
-    NavigationService.navigate("Payment",{totalPrice:totalPrice});
-  }
+    if (radioBtn === '') {
+      ToastAndroid.show('Please select an Address', ToastAndroid.SHORT);
+    } else {
+      NavigationService.navigate('Payment', { totalPrice: totalPrice });
+    }
+  };
 
   //Function for implementing radio button
   function RadioButton(item: AddressInt) {
@@ -227,7 +231,9 @@ interface AddInt {
         </Pressable>
       </ScrollView>
 
-      <Pressable style={styles.proceedbutton} onPress={() => ProceedToPayment()}>
+      <Pressable
+        style={styles.proceedbutton}
+        onPress={() => ProceedToPayment()}>
         <Text style={styles.textStyle}>PROCEED</Text>
       </Pressable>
     </>
@@ -235,4 +241,3 @@ interface AddInt {
 };
 
 export default Address;
-

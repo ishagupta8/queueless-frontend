@@ -1,12 +1,20 @@
-import React, { useState } from 'react';
-import { Image, Pressable, Text, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import {
+  BackHandler,
+  Image,
+  Pressable,
+  Text,
+  ToastAndroid,
+  View,
+} from 'react-native';
 import styles from './styles';
 import NavigationService from 'app/navigation/NavigationService';
 
 const SplashFirst = ({ splashScreen }) => {
   return (
     <View style={styles.container}>
-      <View>
+      <View style={{marginTop:10,alignItems:'center'}}>
+      <Image source={require('../../assets/noQ.png')} />
         <Text style={styles.headerText}>Queues: A thing of the past!!</Text>
       </View>
       <View>
@@ -106,6 +114,19 @@ const SplashSecond = () => {
 
 const Splash: React.FC = () => {
   const [screenFlag, setScreenFlag] = useState(false);
+
+  useEffect(() => {
+    const unsubscribe = BackHandler.addEventListener(
+      'hardwareBackPress',
+      handleBackButton,
+    );
+
+    // return () => null;
+  }, []);
+
+  const handleBackButton = () => {
+    return true;
+  };
   const splashScreen = flag => {
     setScreenFlag(flag);
   };

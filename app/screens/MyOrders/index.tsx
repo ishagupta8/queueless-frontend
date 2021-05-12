@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { View, ScrollView, Text } from 'react-native';
+import { View, ScrollView, Text, ImageBackground } from 'react-native';
 import { useSelector } from 'react-redux';
 import Order from '../../components/Order';
 import styles from './styles';
@@ -33,15 +33,28 @@ const MyOrders: React.FC = () => {
 
   return (
     <>
-      <View style={styles.container}>
-        <Text style={styles.recentText}>Recent</Text>
-        <ScrollView>
-          {ordersFlag &&
-            ordersList.map((item, key: any) => {
-              return <Order order={item} key={key} />;
-            })}
-        </ScrollView>
-      </View>
+      {ordersList.length > 0 ? (
+        <View style={styles.container}>
+          <Text style={styles.recentText}>Recent</Text>
+          <ScrollView>
+            {ordersFlag &&
+              ordersList.map((item, key: any) => {
+                return <Order order={item} key={key} />;
+              })}
+          </ScrollView>
+        </View>
+      ) : (
+        <View style={styles.emptyOrderView}>
+          <ImageBackground
+            source={require('../../assets/loginbg.png')}
+            style={styles.imgcontainer}
+            resizeMode="contain">
+            <Text style={styles.textcontainer}>NO ORDERS PLACED YET !!</Text>
+            <Text style={styles.textcontainer}>SELECT STORE</Text>
+            <Text style={styles.textcontainer}>AND GRAB THE DEALS</Text>
+          </ImageBackground>
+        </View>
+      )}
     </>
   );
 };

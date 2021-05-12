@@ -5,38 +5,7 @@ import InvoiceItem from '../../components/InvoiveItem';
 import NavigationService from '../../navigation/NavigationService';
 import styles from './styles';
 
-const ItemsArray = [
-  {
-    items: 'Lay’s Classic 250g',
-    price: '₹25',
-    qty: '2',
-    amount: '₹50',
-  },
-  {
-    items: 'Chhole Masala 100g',
-    price: '₹55',
-    qty: '1',
-    amount: '₹55',
-  },
-  {
-    items: 'Dry Ginger Powder 250g',
-    price: '₹125',
-    qty: '1',
-    amount: '₹125',
-  },
-  {
-    items: 'Jeera Powder 50g',
-    price: '₹37',
-    qty: '1',
-    amount: '₹37',
-  },
-  {
-    items: 'Appy Fizz 300ml',
-    price: '₹25',
-    qty: '3',
-    amount: '₹75',
-  },
-];
+
 
 const Invoice: React.FC = ({ route }: any) => {
   const { order, store } = route.params;
@@ -141,7 +110,7 @@ const Invoice: React.FC = ({ route }: any) => {
           <View style={styles.buttonView}>
             <Pressable
               style={styles.closeButton}
-              onPress={() => NavigationService.navigate('Barcode')}>
+              onPress={() => NavigationService.navigate('Home')}>
               <Text style={styles.buttonText}>CLOSE</Text>
             </Pressable>
           </View>

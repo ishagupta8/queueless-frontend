@@ -3,7 +3,6 @@
  * Everything starts from the entrypoint
  */
 import React from 'react';
-import { ActivityIndicator } from 'react-native';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/es/integration/react';
 
@@ -15,9 +14,9 @@ const { persistor, store } = configureStore();
 const Entrypoint: React.FC = () => {
   return (
     <Provider store={store}>
-      <PersistGate loading={<ActivityIndicator />} persistor={persistor}>
+      <PersistGate loading={null} persistor={persistor}>
         <Navigator />
-        </PersistGate>
+      </PersistGate>
     </Provider>
   );
 };

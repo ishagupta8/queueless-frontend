@@ -4,6 +4,8 @@ import {
   FlatList,
   Image,
   Pressable,
+  SafeAreaView,
+  StatusBar,
   Text,
   TouchableWithoutFeedback,
   View,
@@ -13,18 +15,18 @@ import { useSelector } from 'react-redux';
 import NavigationService from '../../navigation/NavigationService';
 import Geolocation from 'react-native-geolocation-service';
 import styles from './styles';
+import { ScrollView } from 'react-native-gesture-handler';
 
 interface IStore {
-  storeId:string;
-    name:string,
-    add1:string,
-    distance:string,
-    status:string,
-    storeImgBig:string,
-    storeImgSmall:string,
-  }
-          
-      
+  storeId: string;
+  name: string;
+  add1: string;
+  distance: string;
+  status: string;
+  storeImgBig: string;
+  storeImgSmall: string;
+}
+
 const { width, height } = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
 const LATITUDE = 20.5937;
@@ -33,47 +35,57 @@ const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 const Home = () => {
-  const AddressArray = useSelector((state:any)=> state.stores.storeList);
-    let region = {
-        latitude:LATITUDE,
-        longitude: LONGITUDE,
-        latitudeDelta: LATITUDE_DELTA,
-        longitudeDelta: LONGITUDE_DELTA,
-       };
-    
-       let location ={
-         latitude: 0,
-         longitude: 0,
-       }
-    
-    
-      const [inregion,setInRegion] = useState(region);
-      const [currentLoc,setCurrentLoc] = useState(location);
-      const storecoords =[];
+  const AddressArray = useSelector((state: any) => state.stores.storeList);
+  let region = {
+    latitude: LATITUDE,
+    longitude: LONGITUDE,
+    latitudeDelta: LATITUDE_DELTA,
+    longitudeDelta: LONGITUDE_DELTA,
+  };
 
-      useEffect (() => {
+  let location = {
+    latitude: 0,
+    longitude: 0,
+  };
+
+  const [inregion, setInRegion] = useState(region);
+  const [currentLoc, setCurrentLoc] = useState(location);
+  const storecoords = [];
+
+  useEffect(() => {
     Geolocation.getCurrentPosition(
-      (position) => {
+      position => {
         console.log(position);
-        const {latitude,longitude} = position.coords;
-        setCurrentLoc({latitude,longitude});
+        const { latitude, longitude } = position.coords;
+        setCurrentLoc({ latitude, longitude });
       },
-      (error) => {
+      error => {
         // See error code charts below.
         console.log(error.code, error.message);
       },
-      { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
-  );
-  },[])
-    
-      let mapref:MapView | null;
+      { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 },
+    );
+  }, []);
 
-      const Item = ({name,add1,distance,status,storeImgBig,storeImgSmall,storeId}:IStore) => {
-        const storeInfo = {name,add1,distance,status,storeImgBig,storeId};
-      return (
-        <TouchableWithoutFeedback onPress={() =>openCart(storeInfo)}>
+  let mapref: MapView | null;
+
+  const Item = ({
+    name,
+    add1,
+    distance,
+    status,
+    storeImgBig,
+    storeImgSmall,
+    storeId,
+  }: IStore) => {
+    const storeInfo = { name, add1, distance, status, storeImgBig, storeId };
+    return (
+      <TouchableWithoutFeedback onPress={() => openCart(storeInfo)}>
         <View style={styles.itemStyle}>
-          <Image style={{height:130,width:"100%",alignSelf:'center'}} source={{uri:storeImgSmall}}/>   
+          <Image
+            style={{ height: 130, width: '100%', alignSelf: 'center' }}
+            source={{ uri: storeImgSmall }}
+          />
           <Text style={styles.textStyle}>{name}</Text>
           <Text style={styles.storeAdd}>{add1}</Text>
           <View style={{ flexDirection: 'row' }}>
@@ -98,12 +110,14 @@ const Home = () => {
       storeImgBig={item.storeImgBig}
       storeImgSmall={item.storeImgSmall}
       storeId={item.storeId}
-
     />
   );
 
   const openCart = (storeInfo: any) => {
-    NavigationService.navigate('storeDetails', { storeInfo: storeInfo , currentLoc:currentLoc});
+    NavigationService.navigate('storeDetails', {
+      storeInfo: storeInfo,
+      currentLoc: currentLoc,
+    });
   };
 
   return (
@@ -124,16 +138,13 @@ const Home = () => {
           marginTop: 20,
         }}
         showsUserLocation={true}
-        zoomEnabled = {true}
+        zoomEnabled={true}
         onUserLocationChange={currentLoc =>
           setCurrentLoc(currentLoc.nativeEvent.coordinate)
         }
         region={inregion}
         onRegionChangeComplete={inregion => setInRegion(inregion)}>
-        <Marker
-          coordinate={currentLoc}
-          title="YOU ARE HERE"
-        />
+        <Marker coordinate={currentLoc} title="YOU ARE HERE" />
       </MapView>
 
       <View style={styles.container}>
@@ -155,7 +166,7 @@ const Home = () => {
           style={styles.CartButton}
           onPress={() => NavigationService.navigate('MyOrders')}>
           <Image source={require('../../assets/cartIcon.png')} />
-          <Text style={styles.CartText}>My Cart</Text>
+          <Text style={styles.CartText}>My Orders</Text>
         </Pressable>
         <Pressable style={styles.ListButton}
         onPress={() => NavigationService.navigate('ShoppingList')}>
@@ -168,5 +179,3 @@ const Home = () => {
 };
 
 export default Home;
-
-

@@ -28,7 +28,7 @@ export default function CartItem({ thing, removeItem, getPrice }) {
 
       <View style={styles.detailsContainer}>
         <Text style={styles.detailsText}>{name}</Text>
-        <Text style={styles.priceText}>{price}</Text>
+        <Text style={styles.priceText}>₹{price}</Text>
       </View>
       <View style={styles.spinnerContainer}>
         <InputSpinner
@@ -62,7 +62,7 @@ export default function CartItem({ thing, removeItem, getPrice }) {
           inputStyle={{ padding: 0 }}
           color={'#50AD6C'}
         />
-        <Text style={styles.finalPriceText}>{item_qty * parseInt(price)}</Text>
+        <Text style={styles.finalPriceText}>₹{item_qty * parseInt(price)}</Text>
       </View>
     </View>
   );

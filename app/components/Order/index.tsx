@@ -21,7 +21,8 @@ export default function Order({ order }) {
         <View style={styles.storeContainer}>
           <Image
             source={{
-              uri:arr[0].storeImgBig}}
+              uri: arr[0].storeImgBig,
+            }}
             style={{ width: '100%', height: 60 }}
           />
         </View>
@@ -32,7 +33,7 @@ export default function Order({ order }) {
         </View>
         <View style={styles.totalConatiner}>
           <Text style={styles.priceText}>
-            {(order.totalPrice += 0.05 * order.totalPrice).toFixed(2)}
+            ₹{(order.totalPrice += 0.05 * order.totalPrice).toFixed(2)}
           </Text>
           <View style={styles.optionContainer}>
             <Text style={styles.optionText}>Home Delivery</Text>
