@@ -8,6 +8,9 @@ import { PersistGate } from 'redux-persist/es/integration/react';
 
 import Navigator from './navigation';
 import configureStore from './redux/store';
+import { LogBox } from 'react-native';
+
+LogBox.ignoreAllLogs();
 
 const { persistor, store } = configureStore();
 

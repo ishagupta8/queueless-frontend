@@ -212,7 +212,7 @@ const ScanScreen = ()=> {
             modalVisible={modalVisible}
             handleClose={handleClose}
             modalInput1={Item.name}
-            modalInput2={"₹"+Item.price+"/-"}
+            modalInput2={"₹"+(Item.price!=null?Item.price:"")+"/-"}
             buttontext={"ADD TO CART"}
             addItemToCart = {addItemToCart}
           />

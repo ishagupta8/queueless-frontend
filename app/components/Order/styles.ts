@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
     marginBottom: 10,
-    paddingBottom: 20,
+    paddingBottom: 10,
   },
   orderRow: {
     flexDirection: 'row',
@@ -66,11 +66,11 @@ const styles = StyleSheet.create({
     fontFamily: 'Proxima Nova',
   },
   invoiceRow: {
-    paddingTop: 20,
+    paddingTop: 10,
     backgroundColor: 'white',
   },
   buttonText: {
-    fontSize: 16,
+    fontSize: 14,
     color: 'white',
     fontWeight: 'bold',
     textAlign: 'center',
@@ -78,13 +78,13 @@ const styles = StyleSheet.create({
   invoiceButton: {
     alignContent: 'flex-end',
     borderRadius: 5,
-    padding: 10,
-    paddingRight: 30,
-    paddingLeft: 30,
+    padding: 5,
+    paddingRight: 20,
+    paddingLeft: 20,
     elevation: 2,
     backgroundColor: '#0DB165',
-    width: '45%',
-    alignSelf: 'center',
+    width: '30%',
+    alignSelf: 'flex-end',
   },
 });
 

@@ -15,7 +15,7 @@ import { useSelector } from 'react-redux';
 import NavigationService from '../../navigation/NavigationService';
 import Geolocation from 'react-native-geolocation-service';
 import styles from './styles';
-import { ScrollView } from 'react-native-gesture-handler';
+
 
 interface IStore {
   storeId: string;
@@ -35,6 +35,7 @@ const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 const Home = () => {
+  
   const AddressArray = useSelector((state: any) => state.stores.storeList);
   let region = {
     latitude: LATITUDE,
@@ -50,7 +51,37 @@ const Home = () => {
 
   const [inregion, setInRegion] = useState(region);
   const [currentLoc, setCurrentLoc] = useState(location);
-  const storecoords = [];
+  const [storeFlag,setStoreFlag] = useState(false);
+
+  const storecoords = [
+    {lat:currentLoc.latitude+0.08,long:currentLoc.longitude,storename:"Dmart"},
+    {lat:currentLoc.latitude,long:currentLoc.longitude+0.1,storename:"Metro"},
+    {lat:currentLoc.latitude-0.03,long:currentLoc.longitude,storename:"Big Bazzar"},
+    {lat:currentLoc.latitude-0.09,long:currentLoc.longitude+0.1,storename:"Farm Shop"},
+  ];
+
+  
+  // useEffect(()=> {
+  //   const mapMarkers = () => {
+  //     return storecoords.map((storecords) => <Marker
+  //     coordinate={{ latitude: storecords.lat,
+  //     longitude: storecords.long, }}
+  //     pinColor={"yellow"}
+  //     />)
+  //   }
+
+  //   if(currentLoc.latitude!=0 && currentLoc.longitude!=0)
+  //   mapMarkers();
+  // },[currentLoc])
+
+    const mapMarkers = () => {
+    return storecoords.map((storecords) => <Marker
+    coordinate={{ latitude: storecords.lat,
+    longitude: storecords.long}}
+    pinColor={"#4A89F3"}
+    title={storecords.storename}
+    />)
+  }
 
   useEffect(() => {
     Geolocation.getCurrentPosition(
@@ -58,6 +89,7 @@ const Home = () => {
         console.log(position);
         const { latitude, longitude } = position.coords;
         setCurrentLoc({ latitude, longitude });
+        setStoreFlag(true);
       },
       error => {
         // See error code charts below.
@@ -138,13 +170,13 @@ const Home = () => {
           marginTop: 20,
         }}
         showsUserLocation={true}
-        zoomEnabled={true}
         onUserLocationChange={currentLoc =>
           setCurrentLoc(currentLoc.nativeEvent.coordinate)
         }
         region={inregion}
         onRegionChangeComplete={inregion => setInRegion(inregion)}>
-        <Marker coordinate={currentLoc} title="YOU ARE HERE" />
+        <Marker coordinate={currentLoc} title="YOU ARE HERE"  />
+        {storeFlag && mapMarkers()}
       </MapView>
 
       <View style={styles.container}>
